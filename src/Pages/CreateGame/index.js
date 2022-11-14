@@ -1,27 +1,116 @@
-import React from 'react'
+import React, { useState } from 'react'
+// import { fetchQuestions } from '../../actions';
+import axios from 'axios';
+
 
 export default function CreateGame() {
+
+    const [gameInfo, setGameInfo] = useState({
+        username: "",
+        difficulty: "",
+        numQuestions: "",
+        category: "",
+        questionType: ""
+    });
+
+
+    const handleChange = (e) => {
+        e.preventDefault();
+        const input = e.target.value 
+        setGameInfo(input)
+    };
+
+    const handleDifficultyChange = (e) => {
+        e.preventDefault();
+        const input = e.target.value
+        console.log(input)
+        setGameInfo({difficulty: input})
+    };
+
+    const handleNumQuestionsChange = (e) => {
+        e.preventDefault();
+        const input = e.target.value
+        setGameInfo({numQuestions: input})
+    };
+
+    const handleCategoryChange = (e) => {
+        e.preventDefault();
+        const input = e.target.value
+        setGameInfo({category: input})
+    };
+
+    const handleQuestionTypeChange = (e) => {
+        e.preventDefault();
+        const input = e.target.value
+        setGameInfo({questionType: input})
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        fetchQuestions(gameInfo.category, gameInfo.numQuestions, gameInfo.difficulty, gameInfo.questionType)
+        console.log(gameInfo.category)
+        console.log(gameInfo.numQuestions)
+        console.log(gameInfo.difficulty)
+        console.log(gameInfo.questionType)
+        setGameInfo([
+            {
+                username: "",
+                difficulty: "",
+                numQuestions: "",
+                category: "",
+                questionType: "",
+                id: Math.random() * 1000
+            }
+        ]);
+    };
+
+    const fetchQuestions = async (category, numQuestions, difficulty, type) => {
+        // Key:
+        // Categories: id between 9-32
+        // numQuestions: number (up to 50)
+        // difficulty: easy/medium/hard
+        // type: multiple/boolean
+        try {
+            const { data } = await axios.get(`https://opentdb.com/api.php?amount=${numQuestions}&category=${category}&difficulty=${difficulty}&type=${type}`)
+            console.log(data)
+            return data;
+        } catch (err) {
+            // if (data.status === 404) { throw Error('Unable to retrieve questions!') }
+            throw new Error(err.message)
+        }
+    }
+
+    // useEffect(() => {
+    //     fetchQuestions
+    // })
+
     return (
         <div>
             <h1>Create Game</h1>
-            <form>
-                <input id="username" placeholder='Enter username'/>
-                <br/>
+            <form onSubmit={handleSubmit}>
+                <input id="username" placeholder='Enter username' />
+                <br />
 
                 <label htmlFor="difficulty">Difficulty: </label>
-                <select id="difficulty">
+                <select id="difficulty"
+                    value={gameInfo.difficulty}
+                    onChange={handleDifficultyChange}>
                     <option value="easy">Easy</option>
                     <option value="medium">Medium</option>
                     <option value="hard">Hard</option>
                 </select>
-                <br/>
+                <br />
 
                 <label htmlFor="numQuestions">Number of Questions: </label>
-                <input type="number" id='numQuestions' min={5} max={50} placeholder={10}></input>
-                <br/>
+                <input type="number" id='numQuestions' min={5} max={50}
+                    value={gameInfo.numQuestions}
+                    onChange={handleNumQuestionsChange}></input>
+                <br />
 
                 <label htmlFor="category">Category: </label>
-                <select id="category">
+                <select id="category"
+                    value={gameInfo.category}
+                    onChange={handleCategoryChange}>
                     <option value={9}>General Knowledge</option>
                     <option value={10}>Books</option>
                     <option value={11}>Film</option>
@@ -47,16 +136,18 @@ export default function CreateGame() {
                     <option value={31}>Japanese Anime & Manga</option>
                     <option value={32}>Cartoon & Animations</option>
                 </select>
-                <br/>
+                <br />
 
                 <label htmlFor="questionType">Question Type: </label>
-                <select id="questionType">
+                <select id="questionType"
+                    value={gameInfo.questionType}
+                    onChange={handleQuestionTypeChange}>
                     <option value="multiple">Multiple Choice</option>
                     <option value="boolean">True or False</option>
                 </select>
-                <br/> 
+                <br />
 
-                <button type='submit'>Create Game</button>
+                <input type='submit' value="Create Game" />
 
             </form>
         </div>

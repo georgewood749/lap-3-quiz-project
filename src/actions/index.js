@@ -1,13 +1,14 @@
 import axios from 'axios';
 
-const fetchQuestions = async (category, numQuestions, difficulty, type) => {
+export const fetchQuestions = async (category, numQuestions, difficulty, type) => {
     // Key:
         // Categories: id between 9-32
         // numQuestions: number (up to 50)
         // difficulty: easy/medium/hard
         // type: multiple/boolean
     try {
-        const { data } = await axios.get(`https://opentdb.com/api.php?amount=${numQuestions}&category=${category}&difficulty=${difficulty}&type=${type}`)
+        const data = await axios.get(`https://opentdb.com/api.php?amount=${numQuestions}&category=${category}&difficulty=${difficulty}&type=${type}`)
+        console.log(data)
         return data;
     } catch (err) {
         if (data.status === 404) { throw Error('Unable to retrieve questions!') }
