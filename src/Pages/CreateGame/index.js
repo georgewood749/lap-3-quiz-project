@@ -10,9 +10,9 @@ export default function CreateGame() {
 
                 <label htmlFor="difficulty">Difficulty: </label>
                 <select id="difficulty">
-                    <option value={1}>Easy</option>
-                    <option value={3}>Medium</option>
-                    <option value={5}>Hard</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
                 </select>
                 <br/>
 

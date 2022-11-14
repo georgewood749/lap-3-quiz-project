@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function LeaderBoard() {
+export default function Leaderboard() {
     return (
-        <div>LeaderBoard</div>
+        <div>Leaderboard</div>
     )
 }
