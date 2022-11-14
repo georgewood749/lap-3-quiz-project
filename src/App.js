@@ -7,7 +7,6 @@ import { CreateGame, JoinGame, Leaderboard, Menu, NotFound } from './pages';
 function App() {
   return (
     <div className="App">
-      {/* <Menu /> */}
       <Routes>
         <Route path="/" element={<Menu />} />
         <Route path="/create" element={<CreateGame />} />
@@ -15,7 +14,6 @@ function App() {
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {/* <CreateGame /> */}
     </div>
   );
 }

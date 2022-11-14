@@ -1,6 +1,6 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 // import { fetchQuestions } from '../../actions';
-import axios from 'axios';
 
 
 export default function CreateGame() {
@@ -40,10 +40,10 @@ export default function CreateGame() {
     const handleSubmit = (e) => {
         e.preventDefault();
         fetchQuestions(gameInfo.category, gameInfo.numQuestions, gameInfo.difficulty, gameInfo.questionType)
-        console.log(gameInfo.category)
-        console.log(gameInfo.numQuestions)
-        console.log(gameInfo.difficulty)
-        console.log(gameInfo.questionType)
+        // console.log(gameInfo.category)
+        // console.log(gameInfo.numQuestions)
+        // console.log(gameInfo.difficulty)
+        // console.log(gameInfo.questionType)
         setGameInfo([
             {
                 username: "",
@@ -71,12 +71,12 @@ export default function CreateGame() {
             throw new Error(err.message)
         }
     }
-    
+
 
     return (
         <div>
             <h1>Create Game</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} role="form">
                 <input id="username" placeholder='Enter username' />
                 <br />
 
