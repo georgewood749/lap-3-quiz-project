@@ -4,7 +4,7 @@ export default function CreateGame() {
     return (
         <div class='main'>
             <h1>Create Game</h1>
-            <form>
+            <form id='create' className='center'>
                 {/* <label htmlFor="difficulty">Difficulty: </label> */}
                 <select id="difficulty">
                     <option value='default'>Difficulty</option>
