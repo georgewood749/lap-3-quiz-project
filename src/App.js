@@ -4,13 +4,13 @@ import { CreateGame, Game, JoinGame, Leaderboard, Lobby, Menu, Results } from '.
 function App() {
   return (
     <div className="App">
-      <CreateGame />
+      {/* <CreateGame />
       <Game />
       <JoinGame />
       <Leaderboard />
-      <Lobby />
+      <Lobby /> */}
       <Menu />
-      <Results />
+      {/* <Results /> */}
     </div>
   );
 }
