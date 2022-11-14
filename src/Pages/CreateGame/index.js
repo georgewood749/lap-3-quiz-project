@@ -13,36 +13,28 @@ export default function CreateGame() {
         questionType: ""
     });
 
-
-    const handleChange = (e) => {
-        e.preventDefault();
-        const input = e.target.value 
-        setGameInfo({...gameInfo, })
-    };
-
     const handleDifficultyChange = (e) => {
         e.preventDefault();
         const input = e.target.value
-        console.log(input)
-        setGameInfo({difficulty: input})
+        setGameInfo({ ...gameInfo, difficulty: input })
     };
 
     const handleNumQuestionsChange = (e) => {
         e.preventDefault();
         const input = e.target.value
-        setGameInfo({numQuestions: input})
+        setGameInfo({ ...gameInfo, numQuestions: input })
     };
 
     const handleCategoryChange = (e) => {
         e.preventDefault();
         const input = e.target.value
-        setGameInfo({category: input})
+        setGameInfo({ ...gameInfo, category: input })
     };
 
     const handleQuestionTypeChange = (e) => {
         e.preventDefault();
         const input = e.target.value
-        setGameInfo({questionType: input})
+        setGameInfo({ ...gameInfo, questionType: input })
     };
 
     const handleSubmit = (e) => {
@@ -75,14 +67,11 @@ export default function CreateGame() {
             console.log(data)
             return data;
         } catch (err) {
-            // if (data.status === 404) { throw Error('Unable to retrieve questions!') }
+            // if (data.response_code === 1) { throw Error('Unable to retrieve enough questions!') }
             throw new Error(err.message)
         }
     }
-
-    // useEffect(() => {
-    //     fetchQuestions
-    // })
+    
 
     return (
         <div>
@@ -95,6 +84,7 @@ export default function CreateGame() {
                 <select id="difficulty"
                     value={gameInfo.difficulty}
                     onChange={handleDifficultyChange}>
+                    <option value="">- - Please select - -</option>
                     <option value="easy">Easy</option>
                     <option value="medium">Medium</option>
                     <option value="hard">Hard</option>
@@ -102,7 +92,7 @@ export default function CreateGame() {
                 <br />
 
                 <label htmlFor="numQuestions">Number of Questions: </label>
-                <input type="number" id='numQuestions' min={5} max={50}
+                <input type="number" id='numQuestions' min={5} max={50} required
                     value={gameInfo.numQuestions}
                     onChange={handleNumQuestionsChange}></input>
                 <br />
@@ -111,6 +101,7 @@ export default function CreateGame() {
                 <select id="category"
                     value={gameInfo.category}
                     onChange={handleCategoryChange}>
+                    <option value="">- - Please select - -</option>
                     <option value={9}>General Knowledge</option>
                     <option value={10}>Books</option>
                     <option value={11}>Film</option>
@@ -142,6 +133,7 @@ export default function CreateGame() {
                 <select id="questionType"
                     value={gameInfo.questionType}
                     onChange={handleQuestionTypeChange}>
+                    <option value="">- - Please select - -</option>
                     <option value="multiple">Multiple Choice</option>
                     <option value="boolean">True or False</option>
                 </select>
