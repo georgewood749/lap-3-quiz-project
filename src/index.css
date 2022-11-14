@@ -69,3 +69,68 @@ fieldset legend {
 h1 {
   font-size: 300%;
 }
+
+input[type="text"] {
+  border: 2px solid white;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 5px;
+  height: 50px;
+  width: 100%;
+  color: white;
+  font-size: 150%;
+  padding-left: 20px;
+  box-shadow: none;  
+  background-color: hsla(0, 0%, 100%, 0.25);
+  margin-bottom: 10px;
+  padding: 10px 5px 5px 5px;
+}
+
+input:focus + label, input:valid + label{
+  font-size: 12px;
+  color: black;
+  top: 5px;
+  left: 5px;
+  background: none;
+  padding: 0px 5px 0px 5px;
+}
+
+.input_wrap {
+  width:80%; 
+  height:auto; 
+  position:relative;
+}
+
+.input_wrap label {
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 150%;
+  padding: 14px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+  pointer-events: none;
+}
+
+input[type='submit'] {
+  width: 100px;
+  margin: 0;
+  border: solid 1px black;
+  border-radius: 10px;
+  font-size: 150%;
+  background-color: white;
+  color: black;
+  font-family: 'Poppins', sans-serif;
+}
+
+input[type='submit']:hover {
+  border: solid 1px white;
+  background-color: black;
+  color: white;
+}
+
+#join {
+  padding: 30px 0;
+}

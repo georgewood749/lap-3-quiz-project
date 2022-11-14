@@ -2,6 +2,23 @@ import React from 'react'
 
 export default function JoinGame() {
     return (
-        <div>JoinGame</div>
+        <div className='main'>
+            <h1>Join Game</h1>
+
+            <form id='join' className='center'>
+                <div class="input_wrap">
+                    <input type="text" required />
+                    <label>Enter Meeting ID</label>
+                </div>
+
+                <div class="input_wrap">
+                    <input type="text" required />
+                    <label>Enter Username</label>
+                </div>
+
+                <input type='submit' value='Submit'></input>
+            </form>
+
+        </div>
     )
 }
