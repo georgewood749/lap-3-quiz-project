@@ -2,26 +2,25 @@ import React from 'react'
 
 export default function CreateGame() {
     return (
-        <div>
+        <div class='main'>
             <h1>Create Game</h1>
             <form>
-                <input id="username" placeholder='Enter username'/>
-                <br/>
-
-                <label htmlFor="difficulty">Difficulty: </label>
+                {/* <label htmlFor="difficulty">Difficulty: </label> */}
                 <select id="difficulty">
+                    <option value='default'>Difficulty</option>
                     <option value="easy">Easy</option>
                     <option value="medium">Medium</option>
                     <option value="hard">Hard</option>
                 </select>
                 <br/>
 
-                <label htmlFor="numQuestions">Number of Questions: </label>
-                <input type="number" id='numQuestions' min={5} max={50} placeholder={10}></input>
+                {/* <label htmlFor="numQuestions">Number of Questions: </label> */}
+                <input type="number" id='numQuestions' min={5} max={50} placeholder={'Number of Questions'}></input>
                 <br/>
 
-                <label htmlFor="category">Category: </label>
+                {/* <label htmlFor="category">Category: </label> */}
                 <select id="category">
+                    <option value='default'>Category</option>
                     <option value={9}>General Knowledge</option>
                     <option value={10}>Books</option>
                     <option value={11}>Film</option>
@@ -49,14 +48,15 @@ export default function CreateGame() {
                 </select>
                 <br/>
 
-                <label htmlFor="questionType">Question Type: </label>
+                {/* <label htmlFor="questionType">Question Type: </label> */}
                 <select id="questionType">
+                    <option value='default'>Type</option>
                     <option value="multiple">Multiple Choice</option>
                     <option value="boolean">True or False</option>
                 </select>
                 <br/> 
 
-                <button type='submit'>Create Game</button>
+                <input type='submit' value='Create'></input>
 
             </form>
         </div>
