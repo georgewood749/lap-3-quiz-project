@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { CreateGame, Game, JoinGame, Leaderboard, Lobby, Menu, NotFound, Results } from './Pages';
+import { CreateGame, JoinGame, Leaderboard, Menu, NotFound } from './Pages';
 
 
 function App() {
