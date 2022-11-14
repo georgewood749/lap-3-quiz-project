@@ -6,7 +6,7 @@ describe('Menu', () => {
     test('it renders the title', () => {
         render(<Menu />)
         const heading = screen.getByRole('heading')
-        expect(heading.textContent).toContain('Sunrise, Sunset');
+        expect(heading.textContent).toContain('Game');
     });
 
 });
