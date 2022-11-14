@@ -17,7 +17,7 @@ export default function CreateGame() {
     const handleChange = (e) => {
         e.preventDefault();
         const input = e.target.value 
-        setGameInfo(input)
+        setGameInfo({...gameInfo, })
     };
 
     const handleDifficultyChange = (e) => {
