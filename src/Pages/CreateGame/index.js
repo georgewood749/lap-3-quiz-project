@@ -1,9 +1,14 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, Navigate } from "react-router-dom";
+import { saveUser } from '../../actions';
 
 export default function CreateGame() {
     const navigate = useNavigate()
+
+    const dispatch = useDispatch();
+    const socket = useSelector((state) => state.socket);
 
     const [gameInfo, setGameInfo] = useState({
         username: "",
@@ -13,8 +18,11 @@ export default function CreateGame() {
         questionType: ""
     });
 
-    function SubmitButton(){
-        if (gameInfo.difficulty && gameInfo.numQuestions && gameInfo.category && gameInfo.questionType){
+    const [roomCode, setRoomCode] = useState("");
+
+
+    function SubmitButton() {
+        if (gameInfo.difficulty && gameInfo.numQuestions && gameInfo.category && gameInfo.questionType) {
             return <input type='submit' value='Submit'></input>
         } else {
             return <input type='submit' value='Submit' disabled></input>
@@ -22,7 +30,7 @@ export default function CreateGame() {
     };
 
     const getRandomNum = (min, max) => {
-        return Math.floor(Math.random() * (max - min + 1) ) + min;
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     const handleDifficultyChange = (e) => {
@@ -51,7 +59,16 @@ export default function CreateGame() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetchQuestions(gameInfo.category, gameInfo.numQuestions, gameInfo.difficulty, gameInfo.questionType)
+        const questions = fetchQuestions(gameInfo.category, gameInfo.numQuestions, gameInfo.difficulty, gameInfo.questionType)
+        const random = getRandomNum(100000, 999999)
+        setRoomCode(random)
+        socket.emit("new game", {
+            room: random,
+            host: gameInfo.username,
+            questions
+        })
+        // alert(`Room ID: ${random}`)
+        dispatch(saveUser(gameInfo.username));
         setGameInfo([
             {
                 username: "",
@@ -62,9 +79,8 @@ export default function CreateGame() {
                 id: Math.random() * 1000
             }
         ]);
-        const random = getRandomNum(100000, 999999)
-        alert(`Room ID: ${random}`)
-        navigate('/');
+        // navigate('/');
+        <Navigate to='/lobby' />
     };
 
     const fetchQuestions = async (category, numQuestions, difficulty, type) => {
@@ -75,10 +91,10 @@ export default function CreateGame() {
         // type: multiple/boolean
         try {
             const { data } = await axios.get(`https://opentdb.com/api.php?amount=${numQuestions}&category=${category}&difficulty=${difficulty}&type=${type}`)
-            console.log(data)
-            return data;
+            const questions = data.results
+            console.log(questions)
+            return questions;
         } catch (err) {
-            // if (data.response_code === 1) { throw Error('Unable to retrieve enough questions!') }
             throw new Error(err.message)
         }
     }
@@ -87,7 +103,7 @@ export default function CreateGame() {
     return (
         <div className='main'>
             <h1>Create Game</h1>
-            <form id='create' className='center' onSubmit={handleSubmit} role="form">
+            <form id='create' className='center' onSubmit={handleSubmit}>
                 <input id="username" placeholder='Enter username' />
                 <br />
 
@@ -100,7 +116,7 @@ export default function CreateGame() {
                     <option value="medium">Medium</option>
                     <option value="hard">Hard</option>
                 </select>
-                <br/>
+                <br />
 
                 <label htmlFor="numQuestions">Number of Questions: </label>
                 <input type="number" id='numQuestions' min={5} max={50} required
@@ -150,7 +166,6 @@ export default function CreateGame() {
                 </select>
                 <br />
 
-                {/* <input type='submit' value="Submit" /> */}
                 <SubmitButton />
 
             </form>
