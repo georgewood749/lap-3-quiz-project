@@ -6,6 +6,7 @@ export default function Game() {
     const myTurn = true
     const turn = myTurn ? 'Your turn' : 'Wait'
     const timer = '15s'
+    const otherPlayer = 'X'
 
     return (
         <div>
@@ -60,6 +61,7 @@ export default function Game() {
                     <input type='submit' value='Submit'></input>
 
                 </form>
+                <div id='otherPlayer' className='hide'><div>{otherPlayer} is playing...</div></div>
             </div>
         </div>
     )
