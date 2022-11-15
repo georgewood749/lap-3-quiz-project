@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Menu socket={socket} />} />
         <Route path="/create" element={<CreateGame />} />
-        <Route path="/join" element={<JoinGame />} />
+        <Route path="/join" element={<JoinGame socket={socket}/>} />
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

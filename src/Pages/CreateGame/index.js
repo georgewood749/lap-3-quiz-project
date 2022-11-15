@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function CreateGame() {
     return (
-        <div class='main'>
+        <div className='main'>
             <h1>Create Game</h1>
             <form id='create' className='center'>
                 {/* <label htmlFor="difficulty">Difficulty: </label> */}
