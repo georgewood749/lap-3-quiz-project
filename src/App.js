@@ -1,10 +1,12 @@
 import './App.css';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { CreateGame, Game, JoinGame, Leaderboard, Lobby, Menu, NotFound, Results } from './Pages';
+import { CreateGame, JoinGame, Leaderboard, Menu, NotFound, Game, Lobby, Results } from './pages';
+import { useDispatch, useSelector } from "react-redux";
 
 
 function App() {
+  const dispatch = useDispatch()
   return (
     <div className="App">
       <Routes>

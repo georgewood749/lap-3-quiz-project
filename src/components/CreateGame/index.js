@@ -1,9 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom";
 
 export default function CreateGame() {
-    const navigate = useNavigate()
 
     const [gameInfo, setGameInfo] = useState({
         username: "",
@@ -12,18 +10,6 @@ export default function CreateGame() {
         category: "",
         questionType: ""
     });
-
-    // function SubmitButton(){
-    //     if (difficulty && num && category && type){
-    //         return <input type='submit' value='Submit'></input>
-    //     } else {
-    //         return <input type='submit' value='Submit' disabled></input>
-    //     };
-    // };
-
-    const getRandomNum = (min, max) => {
-        return Math.floor(Math.random() * (max - min + 1) ) + min;
-    }
 
     const handleDifficultyChange = (e) => {
         e.preventDefault();
@@ -62,9 +48,6 @@ export default function CreateGame() {
                 id: Math.random() * 1000
             }
         ]);
-        const random = getRandomNum(100000, 999999)
-        alert(`Room ID: ${random}`)
-        navigate('/');
     };
 
     const fetchQuestions = async (category, numQuestions, difficulty, type) => {
@@ -85,9 +68,9 @@ export default function CreateGame() {
 
 
     return (
-        <div className='main'>
+        <div>
             <h1>Create Game</h1>
-            <form id='create' className='center' onSubmit={handleSubmit} role="form">
+            <form onSubmit={handleSubmit} role="form">
                 <input id="username" placeholder='Enter username' />
                 <br />
 
@@ -100,7 +83,7 @@ export default function CreateGame() {
                     <option value="medium">Medium</option>
                     <option value="hard">Hard</option>
                 </select>
-                <br/>
+                <br />
 
                 <label htmlFor="numQuestions">Number of Questions: </label>
                 <input type="number" id='numQuestions' min={5} max={50} required
@@ -150,8 +133,7 @@ export default function CreateGame() {
                 </select>
                 <br />
 
-                <input type='submit' value="Submit" />
-                {/* <SubmitButton /> */}
+                <input type='submit' value="Create Game" />
 
             </form>
         </div>
