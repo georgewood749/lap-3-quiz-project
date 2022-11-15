@@ -6,12 +6,12 @@ export default function JoinGame() {
             <h1>Join Game</h1>
 
             <form id='join' className='center'>
-                <div class="input_wrap">
+                <div className="input_wrap">
                     <input type="text" required />
                     <label>Enter Meeting ID</label>
                 </div>
 
-                <div class="input_wrap">
+                <div className="input_wrap">
                     <input type="text" required />
                     <label>Enter Username</label>
                 </div>
