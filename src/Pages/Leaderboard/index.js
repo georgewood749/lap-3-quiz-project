@@ -43,7 +43,7 @@ export default function Leaderboard() {
                 index = index
         }
         return (
-            <div>
+            <div className='leaderboardRow'>
                 <h2>{index}: {pos.username}</h2>
                 <h2>{pos.scores}</h2>
             </div>

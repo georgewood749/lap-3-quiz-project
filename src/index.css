@@ -272,6 +272,20 @@ form#create {
   transform: translate(-50%, -50%);
 }
 
+.leaderboardRow {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  margin: 10px auto;
+  border: solid 1px white;
+  border-radius: 10px;
+  padding: 0 10px;
+}
+
+.leaderboardRow:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
 .hide {
   display: none !important;
 }
