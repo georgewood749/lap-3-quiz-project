@@ -1,13 +1,27 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 export default function CreateGame() {
+
+    const [difficulty, setDifficulty] = useState('')
+    const [num, setNum] = useState('')
+    const [category, setCategory] = useState('')
+    const [type, setType] = useState('')
+
+    function SubmitButton(){
+        if (difficulty && num && category && type){
+            return <input type='submit' value='Submit'></input>
+        } else {
+            return <input type='submit' value='Submit' disabled></input>
+        };
+    };
+
     return (
-        <div class='main'>
+        <div className='main'>
             <h1>Create Game</h1>
             <form id='create' className='center'>
                 {/* <label htmlFor="difficulty">Difficulty: </label> */}
-                <select id="difficulty">
-                    <option value='default'>Difficulty</option>
+                <select id="difficulty" value={difficulty} onChange={ e => setDifficulty(e.target.value) }>
+                    <option value=''>Difficulty</option>
                     <option value="easy">Easy</option>
                     <option value="medium">Medium</option>
                     <option value="hard">Hard</option>
@@ -15,12 +29,12 @@ export default function CreateGame() {
                 <br/>
 
                 {/* <label htmlFor="numQuestions">Number of Questions: </label> */}
-                <input type="number" id='numQuestions' min={5} max={50} placeholder={'Number of Questions'}></input>
+                <input type="number" id='numQuestions' min={5} max={50} placeholder={'Number of Questions'} value={num} onChange={ e => setNum(e.target.value) }></input>
                 <br/>
 
                 {/* <label htmlFor="category">Category: </label> */}
-                <select id="category">
-                    <option value='default'>Category</option>
+                <select id="category" value={category} onChange={ e => setCategory(e.target.value) }>
+                    <option value=''>Category</option>
                     <option value={9}>General Knowledge</option>
                     <option value={10}>Books</option>
                     <option value={11}>Film</option>
@@ -49,14 +63,15 @@ export default function CreateGame() {
                 <br/>
 
                 {/* <label htmlFor="questionType">Question Type: </label> */}
-                <select id="questionType">
-                    <option value='default'>Type</option>
+                <select id="questionType" value={type} onChange={ e => setType(e.target.value) }>
+                    <option value=''>Type</option>
                     <option value="multiple">Multiple Choice</option>
                     <option value="boolean">True or False</option>
                 </select>
                 <br/> 
 
-                <input type='submit' value='Create'></input>
+                <SubmitButton />
+                {/* <input type='submit' value='Create'></input> */}
 
             </form>
         </div>
