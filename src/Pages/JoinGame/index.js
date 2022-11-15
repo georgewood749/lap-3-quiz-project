@@ -19,12 +19,12 @@ export default function JoinGame() {
 
             <form id='join' className='center'>
                 <div className="input_wrap">
-                    <input type="text" value={meetingID} onChange={ e => setMeetingID(e.target.value) } />
+                    <input required type="text" value={meetingID} onChange={ e => setMeetingID(e.target.value) } />
                     <label>Enter Meeting ID</label>
                 </div>
 
                 <div className="input_wrap">
-                    <input type="text" value={username} onChange={ e => setUsername(e.target.value) } />
+                    <input required type="text" value={username} onChange={ e => setUsername(e.target.value) } />
                     <label>Enter Username</label>
                 </div>
 
