@@ -190,3 +190,105 @@ form#create {
 #lobby {
   width: 60%;
 }
+
+#gameHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+  margin: auto;
+}
+
+#player, #timer {
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.25);
+  margin: 20px 0;
+  padding: 10px; 
+  font-size: 150%;
+}
+
+#turn {
+  margin: 20px 0;
+  padding: 10px; 
+  font-size: 150%;
+}
+
+#question {
+  width: 95%;
+  margin: 20px auto;
+  border: 1px solid white;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.25);
+  padding: 20px 0;
+  font-size: 150%;
+}
+
+#progressBar {
+  width: 50%;
+  border: solid white 1px;
+  border-radius: 11px;
+  margin: auto;
+  width: 95%;
+}
+
+#progress {
+  background-color: rgb(255, 255, 255);
+  width: 10%; /* change */
+  border-radius: 10px;
+  margin: 0;
+  height: 15px;
+}
+
+#answerBox {
+  width: 95%;
+  margin: 20px auto;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 20px 0;
+  font-size: 150%;
+}
+
+#answerForm {
+  display: flex;
+  flex-direction: column;
+}
+
+/* radio */
+
+#a1, #a2, #a3, #a4 {display:none}    
+
+#answer1, #answer2, #answer3, #answer4 {
+  width: 95%;
+  margin: 10px auto;
+  border: 1px solid white;
+  border-radius: 5px;
+  text-align: left;
+  padding-left: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 150%;
+  color: white;
+} 
+
+#a1:checked ~ label #answer1, #a2:checked ~ label #answer2,
+#a3:checked ~ label #answer3,
+#a4:checked ~ label #answer4 {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+
+
+/* .answer {
+  width: 95%;
+  margin: 10px auto;
+  border: 1px solid white;
+  border-radius: 5px;
+  text-align: left;
+  padding-left: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.answer:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+} */
