@@ -7,8 +7,6 @@ export default function Game() {
     const turn = myTurn ? 'Your turn' : 'Wait'
     const timer = '15s'
 
-    const [answer, setAnswer] = useState('')
-
     return (
         <div>
             <div id='gameHeader'>
@@ -58,6 +56,8 @@ export default function Game() {
                         d. answer 4
                     </div>
                     </label>
+
+                    <input type='submit' value='Submit'></input>
 
                 </form>
             </div>

@@ -253,6 +253,16 @@ form#create {
   flex-direction: column;
 }
 
+#answerForm > input[type='submit'] {
+  width: 10%;
+  margin: auto;
+  font-size: 100%;
+} 
+
+.hide {
+  display: none !important;
+}
+
 /* radio */
 
 #a1, #a2, #a3, #a4 {display:none}    
@@ -272,23 +282,10 @@ form#create {
 
 #a1:checked ~ label #answer1, #a2:checked ~ label #answer2,
 #a3:checked ~ label #answer3,
-#a4:checked ~ label #answer4 {
+#a4:checked ~ label #answer4, 
+#a1:hover ~ label #answer1,
+#a2:hover ~ label #answer2,
+#a3:hover ~ label #answer3,
+#a4:hover ~ label #answer4 {
   background-color: rgba(255, 255, 255, 0.25);
 }
-
-
-
-/* .answer {
-  width: 95%;
-  margin: 10px auto;
-  border: 1px solid white;
-  border-radius: 5px;
-  text-align: left;
-  padding-left: 10px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.answer:hover {
-  background-color: rgba(255, 255, 255, 0.25);
-} */
