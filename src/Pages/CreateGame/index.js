@@ -5,12 +5,6 @@ export default function CreateGame() {
         <div class='main'>
             <h1>Create Game</h1>
             <form id='create' className='center'>
-
-                <div className="input_wrap">
-                    <input type="text" required />
-                    <label>Enter Username</label>
-                </div>
-
                 {/* <label htmlFor="difficulty">Difficulty: </label> */}
                 <select id="difficulty">
                     <option value='default'>Difficulty</option>
