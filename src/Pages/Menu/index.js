@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Menu() {
+export default function Menu({socket}) {
     return (
         <div className='main'>
             <h1>Game</h1>
