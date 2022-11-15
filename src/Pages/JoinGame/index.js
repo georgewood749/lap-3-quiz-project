@@ -5,11 +5,11 @@ export default function JoinGame() {
 
     const navigate = useNavigate();
 
-    const [meetingID, setMeetingID] = useState('')
+    const [roomID, setRoomID] = useState('')
     const [username, setUsername] = useState('')
 
     function SubmitButton(){
-        if (meetingID && username){
+        if (roomID && username){
             return <input type='submit' value='Submit'></input>
         } else {
             return <input type='submit' value='Submit' disabled></input>
@@ -27,8 +27,8 @@ export default function JoinGame() {
 
             <form id='join' className='center' onSubmit={handleSubmit}>
                 <div className="input_wrap">
-                    <input required type="text" value={meetingID} onChange={ e => setMeetingID(e.target.value) } />
-                    <label>Enter Meeting ID</label>
+                    <input required type="text" value={roomID} onChange={ e => setRoomID(e.target.value) } />
+                    <label>Enter Room ID</label>
                 </div>
 
                 <div className="input_wrap">
