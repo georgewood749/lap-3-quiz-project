@@ -13,13 +13,13 @@ export default function CreateGame() {
         questionType: ""
     });
 
-    // function SubmitButton(){
-    //     if (difficulty && num && category && type){
-    //         return <input type='submit' value='Submit'></input>
-    //     } else {
-    //         return <input type='submit' value='Submit' disabled></input>
-    //     };
-    // };
+    function SubmitButton(){
+        if (gameInfo.difficulty && gameInfo.numQuestions && gameInfo.category && gameInfo.questionType){
+            return <input type='submit' value='Submit'></input>
+        } else {
+            return <input type='submit' value='Submit' disabled></input>
+        };
+    };
 
     const getRandomNum = (min, max) => {
         return Math.floor(Math.random() * (max - min + 1) ) + min;
@@ -150,8 +150,8 @@ export default function CreateGame() {
                 </select>
                 <br />
 
-                <input type='submit' value="Submit" />
-                {/* <SubmitButton /> */}
+                {/* <input type='submit' value="Submit" /> */}
+                <SubmitButton />
 
             </form>
         </div>
