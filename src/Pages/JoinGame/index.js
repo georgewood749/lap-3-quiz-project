@@ -1,6 +1,9 @@
 import React, {useState} from 'react'
+import { useNavigate } from "react-router-dom";
 
 export default function JoinGame() {
+
+    const navigate = useNavigate();
 
     const [meetingID, setMeetingID] = useState('')
     const [username, setUsername] = useState('')
@@ -13,18 +16,23 @@ export default function JoinGame() {
         };
     };
 
+    const handleSubmit = (e) => {
+		e.preventDefault();
+		navigate("/lobby");
+	};
+
     return (
         <div className='main'>
             <h1>Join Game</h1>
 
-            <form id='join' className='center'>
+            <form id='join' className='center' onSubmit={handleSubmit}>
                 <div className="input_wrap">
-                    <input type="text" value={meetingID} onChange={ e => setMeetingID(e.target.value) } />
+                    <input required type="text" value={meetingID} onChange={ e => setMeetingID(e.target.value) } />
                     <label>Enter Meeting ID</label>
                 </div>
 
                 <div className="input_wrap">
-                    <input type="text" value={username} onChange={ e => setUsername(e.target.value) } />
+                    <input required type="text" value={username} onChange={ e => setUsername(e.target.value) } />
                     <label>Enter Username</label>
                 </div>
 

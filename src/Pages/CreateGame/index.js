@@ -1,6 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+import { useNavigate } from "react-router-dom";
 
 export default function CreateGame() {
+
+    const navigate = useNavigate();
 
     const [difficulty, setDifficulty] = useState('')
     const [num, setNum] = useState('')
@@ -15,10 +18,21 @@ export default function CreateGame() {
         };
     };
 
+    const getRandomNum = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1) ) + min;
+    }
+
+    const handleSubmit = (e) => {
+		e.preventDefault();
+        const random = getRandomNum(100000, 999999)
+        alert(`Meeting ID: ${random}`)
+		navigate("/");
+	};
+
     return (
         <div className='main'>
             <h1>Create Game</h1>
-            <form id='create' className='center'>
+            <form id='create' className='center' onSubmit={handleSubmit}>
                 {/* <label htmlFor="difficulty">Difficulty: </label> */}
                 <select id="difficulty" value={difficulty} onChange={ e => setDifficulty(e.target.value) }>
                     <option value=''>Difficulty</option>
