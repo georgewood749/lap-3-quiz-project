@@ -1,25 +1,18 @@
 import React, { useState, useEffect } from 'react'
-// import axios from 'axios'
+import axios from 'axios'
 
 export default function Leaderboard() {
     const [usersData, setUsersData] = useState([])
-    const [points, setPoints] = useState('')
-    const [users, setUsers] = useState('')
+
 
     const fetchPoints = async () => {
-        const fetchPointsData = 'https://lap-3-quiz-backend.herokuapp.com/api/getAll'
+        const fetchURL = 'https://lap-3-quiz-backend.herokuapp.com/users/leaderboard'
+        // const fetchPointsData = 'http://localhost:3000/users/leaderboard'
         try {
-            const pointsDataRaw = await fetch(fetchPointsData);
-            const pointsData = await pointsDataRaw.json();
-            // const pointsData = axios.get(fetchPointsData)
-            const users = pointsData.map(user => user.username)
-            const points = pointsData.map(user => user.points)
-            setUsersData(pointsData)
-            setUsers(users)
-            setPoints(points)
-            console.log("usersData: ", usersData)
-            console.log("users: ", users)
-            console.log("points: ", points)
+            const pointsData = await axios.get(fetchURL)
+            setUsersData(pointsData.data.users)
+            // console.log("usersData: ", usersData)
+            // console.log("pointsData: ", pointsData.data)
         } catch (err) {
             console.error(err)
         }
@@ -27,11 +20,40 @@ export default function Leaderboard() {
 
     useEffect(() => {
         fetchPoints()
+        // console.log(usersData)
     }, [])
+
+    // fetchPoints()
+
+
+
+    const renderLeaderboard = usersData.map((pos, index) => {
+        index ++
+        switch (index) {
+            case 1:
+                index = "🥇"
+                break
+            case 2:
+                index = "🥈"
+                break
+            case 3:
+                index = "🥉"
+                break
+            default:
+                index = index
+        }
+        return (
+            <div>
+                <h2>{index}: {pos.username}</h2>
+                <h2>{pos.scores}</h2>
+            </div>
+        )
+    })
 
     return (
         <div>
             <h1>Leaderboard</h1>
+            {renderLeaderboard}
         </div>
     )
 }

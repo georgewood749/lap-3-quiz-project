@@ -2,9 +2,11 @@ import './App.css';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { CreateGame, JoinGame, Leaderboard, Menu, NotFound } from './pages';
+import { useDispatch, useSelector } from "react-redux";
 
 
 function App() {
+  const dispatch = useDispatch()
   return (
     <div className="App">
       <Routes>
