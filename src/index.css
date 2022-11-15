@@ -286,6 +286,16 @@ form#create {
   background-color: rgba(255, 255, 255, 0.25);
 }
 
+#winner {
+  width: 60%;
+  margin: 10px auto;
+  border: solid 1px white;
+  border-radius: 10px;
+  padding: 20px 10px;
+  font-size: 150%;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
 .hide {
   display: none !important;
 }
