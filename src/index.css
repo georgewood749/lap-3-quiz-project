@@ -117,7 +117,7 @@ input:focus + label, input:valid + label{
   pointer-events: none;
 }
 
-input[type='submit'] {
+input[type='submit']:disabled {
   border: solid 1px white;
   background-color: rgba(255, 255, 255, 0.25);
   color: white;
@@ -128,10 +128,26 @@ input[type='submit'] {
   font-family: 'Poppins', sans-serif;
 }
 
-input[type='submit']:hover {
+input[type='submit'] {
   border: solid 1px black;
   background-color: white;
   color: black;
+  width: 100px;
+  margin: 0;
+  border-radius: 10px;
+  font-size: 150%;
+  font-family: 'Poppins', sans-serif;
+}
+
+input[type='submit']:hover:not(:disabled) {
+  border: solid 1px white;
+  background-color: black;
+  color: white;
+  width: 100px;
+  margin: 0;
+  border-radius: 10px;
+  font-size: 150%;
+  font-family: 'Poppins', sans-serif;
 }
 
 form#join {
