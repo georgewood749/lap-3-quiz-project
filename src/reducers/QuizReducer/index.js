@@ -18,6 +18,11 @@ const QuizReducer = (state = initialState, action) => {
             return { ...state, user: action.payload }
         case "START":
             return { ...state, quiz: { ...state.quiz, started: true } }
+        case "FINISH":
+            let finishedUsers = [...state.quiz.users];
+            let userIndex = finishedUsers.findIndex(user => user.name === action.payload)
+            finishedUsers[userIndex].finished = true;
+            return {...state, quiz: {...state.quiz, users: finishedUsers}}
         case "NEXT_QUESTION":
             let nextQ = state.quiz.question + 1
             return { ...state, quiz: { ...state.quiz, question: nextQ } }

@@ -32,6 +32,13 @@ const start = () => {
     }
 }
 
+const finish = (user) => {
+    return {
+        type: "FINISH",
+        payload: user
+    }
+}
+
 const nextQuestion = () => {
     return {
         type: 'NEXT_QUESTION'
@@ -46,4 +53,4 @@ const addPoints = (player, points) => {
     }
 }
 
-export { saveSocket, updateState, newUser, saveUser, start, nextQuestion, addPoints };
+export { saveSocket, updateState, newUser, saveUser, start, finish, nextQuestion, addPoints };

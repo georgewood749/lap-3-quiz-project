@@ -5,7 +5,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { saveUser } from '../../actions';
 
 export default function CreateGame() {
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     const dispatch = useDispatch();
     const socket = useSelector((state) => state.socket);
