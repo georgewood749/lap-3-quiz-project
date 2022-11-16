@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { CreateGame, Game, JoinGame, Leaderboard, Lobby, Menu, NotFound, Results } from './Pages';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,16 +11,18 @@ const serverEP = "http://localhost:3030/";
 
 function App() {
   const dispatch = useDispatch();
-  const socket = useSelector(state => state.socket.id)
+  const socket = useSelector(state => state.socket.socket)
 
   useEffect(() => {
-    const newSocket = io(serverEP);
-    dispatch(store_socket(newSocket))
+    const pubSocket = io(serverEP);
+    pubSocket.on('connect', () => {
+      dispatch(store_socket(pubSocket))
+    })
   },[])
 
   useEffect(() => {
     if(socket){
-      console.log(socket);
+      console.log(socket.id);
     }
   },[socket])
 

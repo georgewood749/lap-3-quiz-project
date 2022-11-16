@@ -1,9 +1,16 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import { store_qa, store_room, add_player } from '../../actions/socket/socketSlice'
+
 
 export default function CreateGame() {
     const navigate = useNavigate()
+    const dispatch = useDispatch();
+
+    const socket = useSelector(state => state.socket.socket)
+    const qa = useSelector(state => state.socket.qa);
 
     const [gameInfo, setGameInfo] = useState({
         username: "",
@@ -13,45 +20,34 @@ export default function CreateGame() {
         questionType: ""
     });
 
-    function SubmitButton(){
-        if (gameInfo.difficulty && gameInfo.numQuestions && gameInfo.category && gameInfo.questionType){
-            return <input type='submit' value='Submit'></input>
-        } else {
-            return <input type='submit' value='Submit' disabled></input>
-        };
-    };
 
-    const getRandomNum = (min, max) => {
-        return Math.floor(Math.random() * (max - min + 1) ) + min;
+    const fetchQuestions = async (category, numQuestions, difficulty, type) => {
+        //* Key:
+        // Categories: id between 9-32
+        // numQuestions: number (up to 50)
+        // difficulty: easy/medium/hard
+        // type: multiple/boolean
+        try {
+            const { data } = await axios.get(`https://opentdb.com/api.php?amount=${numQuestions}&category=${category}&difficulty=${difficulty}&type=${type}`)
+            // return data
+            dispatch(store_qa(data));
+        } catch (err) {
+            // if (data.response_code === 1) { throw Error('Unable to retrieve enough questions!') }
+            throw new Error(err.message)
+        }
     }
-
-    const handleDifficultyChange = (e) => {
-        e.preventDefault();
-        const input = e.target.value
-        setGameInfo({ ...gameInfo, difficulty: input })
-    };
-
-    const handleNumQuestionsChange = (e) => {
-        e.preventDefault();
-        const input = e.target.value
-        setGameInfo({ ...gameInfo, numQuestions: input })
-    };
-
-    const handleCategoryChange = (e) => {
-        e.preventDefault();
-        const input = e.target.value
-        setGameInfo({ ...gameInfo, category: input })
-    };
-
-    const handleQuestionTypeChange = (e) => {
-        e.preventDefault();
-        const input = e.target.value
-        setGameInfo({ ...gameInfo, questionType: input })
-    };
+        //! try fetchQA in socket.io-server and use cb to dispatch store_qa
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetchQuestions(gameInfo.category, gameInfo.numQuestions, gameInfo.difficulty, gameInfo.questionType)
+        // fetchQuestions(gameInfo.category, gameInfo.numQuestions, gameInfo.difficulty, gameInfo.questionType)
+
+        //* Create a roomID and join
+        // const roomID = Math.ceil(Math.random() * 100);
+        socket.emit('join-room', "2", roomInfo => {
+            dispatch(store_room(roomInfo));
+        })
+
         setGameInfo([
             {
                 username: "",
@@ -59,29 +55,12 @@ export default function CreateGame() {
                 numQuestions: "",
                 category: "",
                 questionType: "",
-                id: Math.random() * 1000
             }
         ]);
-        const random = getRandomNum(100000, 999999)
-        alert(`Room ID: ${random}`)
-        navigate('/');
+        navigate('/lobby');
     };
 
-    const fetchQuestions = async (category, numQuestions, difficulty, type) => {
-        // Key:
-        // Categories: id between 9-32
-        // numQuestions: number (up to 50)
-        // difficulty: easy/medium/hard
-        // type: multiple/boolean
-        try {
-            const { data } = await axios.get(`https://opentdb.com/api.php?amount=${numQuestions}&category=${category}&difficulty=${difficulty}&type=${type}`)
-            console.log(data)
-            return data;
-        } catch (err) {
-            // if (data.response_code === 1) { throw Error('Unable to retrieve enough questions!') }
-            throw new Error(err.message)
-        }
-    }
+
 
 
     return (
@@ -92,7 +71,7 @@ export default function CreateGame() {
                 {/* <label htmlFor="difficulty">Difficulty: </label> */}
                 <select id="difficulty"
                     value={gameInfo.difficulty}
-                    onChange={handleDifficultyChange}>
+                    onChange={(e) => setGameInfo({...gameInfo, difficulty: e.target.value})}>
                     <option value="">Difficulty</option>
                     <option value="easy">Easy</option>
                     <option value="medium">Medium</option>
@@ -107,13 +86,13 @@ export default function CreateGame() {
                 placeholder='Number of Questions' 
                 required 
                 value={gameInfo.numQuestions} 
-                onChange={handleNumQuestionsChange}></input>
+                onChange={(e) => setGameInfo({ ...gameInfo, numQuestions: e.target.value })}></input>
                 <br />
 
                 {/* <label htmlFor="category">Category: </label> */}
                 <select id="category"
                     value={gameInfo.category}
-                    onChange={handleCategoryChange}>
+                    onChange={(e) => setGameInfo({ ...gameInfo, category: e.target.value })}>
                     <option value="">Category</option>
                     <option value={9}>General Knowledge</option>
                     <option value={10}>Books</option>
@@ -145,7 +124,7 @@ export default function CreateGame() {
                 {/* <label htmlFor="questionType">Question Type: </label> */}
                 <select id="questionType"
                     value={gameInfo.questionType}
-                    onChange={handleQuestionTypeChange}>
+                    onChange={(e) => setGameInfo({ ...gameInfo, questionType: e.target.value })}>
                     <option value="">Type</option>
                     <option value="multiple">Multiple Choice</option>
                     <option value="boolean">True or False</option>
@@ -153,7 +132,7 @@ export default function CreateGame() {
                 <br />
 
                 {/* <input type='submit' value="Submit" /> */}
-                <SubmitButton />
+                <input type='submit' value='Submit' disabled={!(gameInfo.difficulty && gameInfo.numQuestions && gameInfo.category && gameInfo.questionType)}></input>
 
             </form>
         </div>
