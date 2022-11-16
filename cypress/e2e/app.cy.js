@@ -73,10 +73,12 @@ describe("Create Game", () => {
     cy.get('#category').select('9');
     cy.get('#questionType').select('multiple');
     cy.get('[type="submit"]').should('not.be.disabled').click();
+    cy.location('pathname').should('match', /\/$/);
   })
 
   it('submit button is disabled for an empty form', () => {
     cy.get('[type="submit"]').should('be.disabled');
+    cy.location('pathname').should('match', /\/create$/);
   })
 
   it('submit button is disabled for an incomplete form - difficulty not selected', () => {
@@ -84,6 +86,7 @@ describe("Create Game", () => {
     cy.get('#category').select('9');
     cy.get('#questionType').select('multiple');
     cy.get('[type="submit"]').should('be.disabled');
+    cy.location('pathname').should('match', /\/create$/);
   })
 
   it('submit button is disabled for an incomplete form - number of questions not selected', () => {
@@ -91,6 +94,7 @@ describe("Create Game", () => {
     cy.get('#category').select('9');
     cy.get('#questionType').select('multiple');
     cy.get('[type="submit"]').should('be.disabled');
+    cy.location('pathname').should('match', /\/create$/);
   })
 
   it('submit button is disabled for an incomplete form - category not selected', () => {
@@ -98,6 +102,7 @@ describe("Create Game", () => {
     cy.get('#numQuestions').type('10');
     cy.get('#questionType').select('multiple');
     cy.get('[type="submit"]').should('be.disabled');
+    cy.location('pathname').should('match', /\/create$/);
   })
 
   it('submit button is disabled for an incomplete form - type not selected', () => {
@@ -105,6 +110,7 @@ describe("Create Game", () => {
     cy.get('#numQuestions').type('10');
     cy.get('#category').select('9');
     cy.get('[type="submit"]').should('be.disabled');
+    cy.location('pathname').should('match', /\/create$/);
   })
 
   it('submit button should not be disabled when number of questions is equal to the minimum number allowed (i.e. 5)', () => {
@@ -113,6 +119,7 @@ describe("Create Game", () => {
     cy.get('#category').select('9');
     cy.get('#questionType').select('multiple');
     cy.get('[type="submit"]').should('not.be.disabled').click();
+    cy.location('pathname').should('match', /\/$/);
   })
 
   it('submit button should not be disabled when number of questions is equal to the maximum number allowed (i.e. 5o)', () => {
@@ -121,6 +128,7 @@ describe("Create Game", () => {
     cy.get('#category').select('9');
     cy.get('#questionType').select('multiple');
     cy.get('[type="submit"]').should('not.be.disabled').click();
+    cy.location('pathname').should('match', /\/$/);
   })
 
   it('submit button should be disabled when number of questions is under the minimum number allowed (i.e. less than 5)', () => {
@@ -129,6 +137,7 @@ describe("Create Game", () => {
     cy.get('#category').select('9');
     cy.get('#questionType').select('multiple');
     cy.get('[type="submit"]').should('be.disabled');
+    cy.location('pathname').should('match', /\/create$/);
   })
 
   it('submit button should be disabled when number of questions is over the maximum number allowed (i.e. more than 50)', () => {
@@ -137,6 +146,7 @@ describe("Create Game", () => {
     cy.get('#category').select('9');
     cy.get('#questionType').select('multiple');
     cy.get('[type="submit"]').should('be.disabled');
+    cy.location('pathname').should('match', /\/create$/);
   })
 
 })
@@ -151,40 +161,47 @@ describe("Join Game", () => {
     cy.get('#join > :nth-child(1) > input').clear().type('123456');
     cy.get('#join > :nth-child(2) > input').clear().type('testUsername');
     cy.get('[type="submit"]').should('not.be.disabled').click();
+    cy.location('pathname').should('match', /\/lobby$/);
   })
 
   it('submit button is disabled for an incomplete form - room ID field is empty', () => {
     cy.get('#join > :nth-child(2) > input').clear().type('testUsername');
     cy.get('[type="submit"]').should('be.disabled');
+    cy.location('pathname').should('match', /\/join$/);
   })
 
   it('submit button is disabled for an incomplete form - username field is empty', () => {
     cy.get('#join > :nth-child(1) > input').clear().type('123456');
     cy.get('[type="submit"]').should('be.disabled');
+    cy.location('pathname').should('match', /\/join$/);
   })
 
   it('submit button is abled when room ID is equal to the minimum value for a room ID i.e. 100000', () => {
     cy.get('#join > :nth-child(1) > input').clear().type('100000');
     cy.get('#join > :nth-child(2) > input').clear().type('testUsername');
     cy.get('[type="submit"]').should('not.be.disabled').click();
+    cy.location('pathname').should('match', /\/lobby$/);
   })
 
   it('submit button is abled when room ID is equal to the maximum value for a room ID i.e. 999999', () => {
     cy.get('#join > :nth-child(1) > input').clear().type('999999');
     cy.get('#join > :nth-child(2) > input').clear().type('testUsername');
     cy.get('[type="submit"]').should('not.be.disabled').click();
+    cy.location('pathname').should('match', /\/lobby$/);
   })
 
   it('submit button is disabled when room ID is under the minimum value for a room ID i.e. less than 100000', () => {
     cy.get('#join > :nth-child(1) > input').clear().type('99999');
     cy.get('#join > :nth-child(2) > input').clear().type('testUsername');
     cy.get('[type="submit"]').should('be.disabled');
+    cy.location('pathname').should('match', /\/join$/);
   })
 
   it('submit button is disabled when room ID is over the maximum value for a room ID i.e. more than 999999', () => {
     cy.get('#join > :nth-child(1) > input').clear().type('1000000');
     cy.get('#join > :nth-child(2) > input').clear().type('testUsername');
     cy.get('[type="submit"]').should('be.disabled');
+    cy.location('pathname').should('match', /\/join$/);
   })
 
 })
