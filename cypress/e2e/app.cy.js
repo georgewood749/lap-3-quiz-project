@@ -19,6 +19,30 @@ describe("Expected routes exist", () => {
     cy.visit('http://localhost:3000/leaderboard');
   })
 
+  it("opens lobby successfully", () => {
+    cy.visit('http://localhost:3000/lobby');
+  })
+
+  it("opens game successfully", () => {
+    cy.visit('http://localhost:3000/game');
+  })
+
+  it("opens results successfully", () => {
+    cy.visit('http://localhost:3000/results');
+  })
+
+  it("opens 'not found' successfully", () => {
+    cy.visit('http://localhost:3000/*');
+  })
+
+})
+
+
+describe("Menu", () => {
+  beforeEach(() => {
+    cy.viewport(1600, 900);
+  })
+
   it('allows user to navigate from menu to create game form', () => {
     cy.visit('http://localhost:3000/');
     cy.get('#create').click({force: true});
@@ -37,15 +61,21 @@ describe("Expected routes exist", () => {
     cy.location('pathname').should('match', /\/leaderboard$/);
   })
 
+})
+
+describe("Create Game", () => {
+  beforeEach(() => {
+    cy.viewport(1600, 900);
+  })
+
   it('allows user to fill in the create game form and submit it', () => {
     cy.visit('http://localhost:3000/');
     cy.get('#create').click({force: true});
     cy.get('#difficulty', {withinSubject:null}).select('easy', { force: true });
-    cy.get('#numQuestions').type('10', { force: true });
+    cy.get('#numQuestions').clear().type('10', { force: true });
     cy.get('#category', {withinSubject:null}).select('9', { force: true });
     cy.get('#questionType', {withinSubject:null}).select('multiple', { force: true });
     cy.get('[type="submit"]').click({ force: true });
   })
 
 })
-
