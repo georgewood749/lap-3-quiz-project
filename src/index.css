@@ -190,3 +190,139 @@ form#create {
 #lobby {
   width: 60%;
 }
+
+#gameHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+  margin: auto;
+}
+
+#player, #timer {
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.25);
+  margin: 20px 0;
+  padding: 10px; 
+  font-size: 150%;
+}
+
+#turn {
+  margin: 20px 0;
+  padding: 10px; 
+  font-size: 150%;
+}
+
+#question {
+  width: 95%;
+  margin: 20px auto;
+  border: 1px solid white;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.25);
+  padding: 20px 0;
+  font-size: 150%;
+}
+
+#progressBar {
+  width: 50%;
+  border: solid white 1px;
+  border-radius: 11px;
+  margin: auto;
+  width: 95%;
+}
+
+#progress {
+  background-color: rgb(255, 255, 255);
+  width: 10%; /* change */
+  border-radius: 10px;
+  margin: 0;
+  height: 15px;
+}
+
+#answerBox {
+  width: 95%;
+  margin: 20px auto;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 20px 0;
+  font-size: 150%;
+  height: 450px;
+}
+
+#answerForm {
+  display: flex;
+  flex-direction: column;
+}
+
+#answerForm > input[type='submit'] {
+  width: 10%;
+  margin: auto;
+  font-size: 100%;
+} 
+
+#otherPlayer {
+  position: relative;
+  height: 100%;
+}
+
+#otherPlayer > div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.leaderboardRow {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  margin: 10px auto;
+  border: solid 1px white;
+  border-radius: 10px;
+  padding: 0 10px;
+}
+
+.leaderboardRow:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+#winner {
+  width: 60%;
+  margin: 10px auto;
+  border: solid 1px white;
+  border-radius: 10px;
+  padding: 20px 10px;
+  font-size: 150%;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.hide {
+  display: none !important;
+}
+
+/* radio */
+
+#a1, #a2, #a3, #a4 {display:none}    
+
+#answer1, #answer2, #answer3, #answer4 {
+  width: 95%;
+  margin: 15px auto;
+  border: 1px solid white;
+  border-radius: 5px;
+  text-align: left;
+  padding-left: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 150%;
+  color: white;
+} 
+
+#a1:checked ~ label #answer1, #a2:checked ~ label #answer2,
+#a3:checked ~ label #answer3,
+#a4:checked ~ label #answer4, 
+#a1:hover ~ label #answer1,
+#a2:hover ~ label #answer2,
+#a3:hover ~ label #answer3,
+#a4:hover ~ label #answer4 {
+  background-color: rgba(255, 255, 255, 0.25);
+}

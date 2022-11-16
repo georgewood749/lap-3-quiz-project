@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { CreateGame, JoinGame, Leaderboard, Menu, NotFound, Game, Lobby, Results } from './pages';
+import { CreateGame, JoinGame, Leaderboard, Menu, NotFound, Game, Lobby, Results, OfflineGame } from './pages';
 import { useDispatch, useSelector } from "react-redux";
 import { addPoints, finish, newUser, saveSocket, updateState } from './actions';
 const io = require("socket.io-client");
@@ -22,7 +22,7 @@ function App() {
       dispatch(updateState(state))
     })
 
-    newSocket.on("update scores", ({user, score}) => {
+    newSocket.on("update scores", ({ user, score }) => {
       dispatch(addPoints(user, score))
     })
 
@@ -61,6 +61,7 @@ function App() {
         <Route path="/game" element={<Game />} />
         <Route path="/lobby" element={<Lobby />} />
         <Route path="/results" element={<Results />} />
+        <Route path="/offline" element={<OfflineGame />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

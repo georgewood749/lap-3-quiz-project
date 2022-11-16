@@ -3,9 +3,10 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Navigate } from "react-router-dom";
 import { saveUser } from '../../actions';
+import { store_questions } from '../../actions/questions/questionsSlice';
 
 export default function CreateGame() {
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
     const dispatch = useDispatch();
     const socket = useSelector((state) => state.socket);
@@ -14,18 +15,27 @@ export default function CreateGame() {
         username: "",
         difficulty: "",
         numQuestions: "",
-        category: "",
-        questionType: ""
+        category: ""
     });
 
     const [roomCode, setRoomCode] = useState("");
 
+    const [Qs, setQs] = useState([])
+
 
     function SubmitButton() {
-        if (gameInfo.difficulty && gameInfo.numQuestions && gameInfo.category && gameInfo.questionType) {
+        if (gameInfo.difficulty && gameInfo.numQuestions && gameInfo.category) {
             return <input type='submit' value='Submit'></input>
         } else {
             return <input type='submit' value='Submit' disabled></input>
+        };
+    };
+
+    function SubmitButtonOffline() {
+        if (gameInfo.difficulty && gameInfo.numQuestions && gameInfo.category) {
+            return <input type='submit' value='Offline' onClick={handleSubmitOffline}></input>
+        } else {
+            return <input type='submit' value='Offline' disabled></input>
         };
     };
 
@@ -51,15 +61,9 @@ export default function CreateGame() {
         setGameInfo({ ...gameInfo, category: input })
     };
 
-    const handleQuestionTypeChange = (e) => {
-        e.preventDefault();
-        const input = e.target.value
-        setGameInfo({ ...gameInfo, questionType: input })
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        const questions = fetchQuestions(gameInfo.category, gameInfo.numQuestions, gameInfo.difficulty, gameInfo.questionType)
+        const questions = fetchQuestions(gameInfo.category, gameInfo.numQuestions, gameInfo.difficulty)
         const random = getRandomNum(100000, 999999)
         setRoomCode(random)
         socket.emit("new game", {
@@ -75,24 +79,41 @@ export default function CreateGame() {
                 difficulty: "",
                 numQuestions: "",
                 category: "",
-                questionType: "",
                 id: Math.random() * 1000
             }
         ]);
-        // navigate('/');
-        <Navigate to='/lobby' />
+        navigate('/');
+        // <Navigate to='/lobby' />
     };
 
-    const fetchQuestions = async (category, numQuestions, difficulty, type) => {
+    const handleSubmitOffline = (e) => {
+        e.preventDefault();
+        const questionsArray = fetchQuestions(gameInfo.category, gameInfo.numQuestions, gameInfo.difficulty)
+        setQs(questionsArray)
+        dispatch(store_questions(Qs))
+        navigate('/offline', { state: { category: gameInfo.category, numQuestions: gameInfo.numQuestions, difficulty: gameInfo.difficulty } });
+        setGameInfo([
+            {
+                username: "",
+                difficulty: "",
+                numQuestions: "",
+                category: "",
+                id: Math.random() * 1000
+            }
+        ]);
+        // <Navigate to='/lobby' />
+    };
+
+    const fetchQuestions = async (category, numQuestions, difficulty) => {
         // Key:
         // Categories: id between 9-32
         // numQuestions: number (up to 50)
         // difficulty: easy/medium/hard
-        // type: multiple/boolean
+
         try {
-            const { data } = await axios.get(`https://opentdb.com/api.php?amount=${numQuestions}&category=${category}&difficulty=${difficulty}&type=${type}`)
+            const { data } = await axios.get(`https://opentdb.com/api.php?amount=${numQuestions}&category=${category}&difficulty=${difficulty}&type=multiple`)
             const questions = data.results
-            console.log(questions)
+            // console.log(questions)
             return questions;
         } catch (err) {
             throw new Error(err.message)
@@ -156,17 +177,8 @@ export default function CreateGame() {
                 </select>
                 <br />
 
-                <label htmlFor="questionType">Question Type: </label>
-                <select id="questionType"
-                    value={gameInfo.questionType}
-                    onChange={handleQuestionTypeChange}>
-                    <option value="">- - Please select - -</option>
-                    <option value="multiple">Multiple Choice</option>
-                    <option value="boolean">True or False</option>
-                </select>
-                <br />
-
                 <SubmitButton />
+                <SubmitButtonOffline />
 
             </form>
         </div>

@@ -3,8 +3,9 @@ import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 
 
-import axios from 'axios';
+const axios = require('axios');
+
 jest.mock('axios')
-axios.get.mockResolvedValue({ data: { message: [] } })
+// axios.get.mockResolvedValue({ data: { message: [] } })
 
 global.React = React
