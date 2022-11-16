@@ -4,8 +4,7 @@ export const socketSlice = createSlice({
     name: 'socket',
     initialState: {
         socket: null,
-        room: {roomID: null, roomSize: 0},
-        player: 0,
+        room: {roomID: null, roomSize: 0, playersID:[]},
         qa: null,
     },
     reducers: {
@@ -14,9 +13,6 @@ export const socketSlice = createSlice({
         },
         store_room: ( state, action ) => {
             state.room = action.payload
-        },
-        add_player: (state) => {
-            state.player += 1
         },
         store_qa: ( state, action ) => {
             state.qa = action.payload
@@ -29,6 +25,6 @@ export const socketSlice = createSlice({
     },
 })
 
-export const { store_socket, store_room, add_player, store_qa } = socketSlice.actions
+export const { store_socket, store_room, store_qa } = socketSlice.actions
 
 export default socketSlice.reducer

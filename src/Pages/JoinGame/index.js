@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import { add_player, store_room } from '../../actions/socket/socketSlice'
+import { store_room } from '../../actions/socket/socketSlice'
 
 
 export default function JoinGame() {
@@ -15,19 +15,10 @@ export default function JoinGame() {
     const socket = useSelector(state => state.socket.socket)
     const dispatch = useDispatch();
 
-
-    function SubmitButton(){
-        if (roomID && username){
-            return <input type='submit' value='Submit'></input>
-        } else {
-            return <input type='submit' value='Submit' disabled></input>
-        };
-    };
-
     const handleSubmit = (e) => {
 		e.preventDefault();
 
-        socket.emit('join-room', roomID, roomInfo => {
+        socket.emit('join-room', roomID, username, roomInfo => {
             dispatch(store_room(roomInfo));
         })
 
@@ -49,8 +40,7 @@ export default function JoinGame() {
                     <label>Enter Username</label>
                 </div>
 
-                <SubmitButton/>
-                {/* <input type='submit' value='Submit'></input> */}
+                <input type='submit' value='Submit' disabled={!(roomID && username)}></input>
             </form>
 
         </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import loading from "./loading.png";
 import { useSelector, useDispatch } from 'react-redux';
+import { store_room } from '../../actions/socket/socketSlice';
 
 
 export default function Lobby() {
@@ -12,12 +13,10 @@ export default function Lobby() {
     const roomInfo = useSelector(state => state.socket.room)
     const dispatch = useDispatch();
 
-    const [ players, setPlayers ] = useState(0)
-
     useEffect(()=>{
-        socket.on('update-players', (players, cb) => {
-            setPlayers(players); 
-            cb(players)})
+        socket.on('update-players', (roomID, roomSize, playersID) => {
+            dispatch(store_room({roomID: roomID, roomSize: roomSize, playersID: playersID}))
+        })
     },[])
 
     return (
@@ -26,7 +25,7 @@ export default function Lobby() {
             <div id='lobbyID'>Meeting ID: {roomInfo.roomID}</div>
             <div id='lobby' className='center'>
                 <img src={loading} alt="Loading" />
-                <h2 id='playerCount'>{players} players in lobby...</h2>
+                <h2 id='playerCount'>{roomInfo.roomSize} players in lobby...</h2>
             </div>
         </div>
     )
