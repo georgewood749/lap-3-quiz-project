@@ -9,7 +9,7 @@ export default function JoinGame() {
     const [username, setUsername] = useState('')
 
     function SubmitButton(){
-        if (roomID && username){
+        if ((+roomID >= 100000 && +roomID <= 999999) && username){
             return <input type='submit' value='Submit'></input>
         } else {
             return <input type='submit' value='Submit' disabled></input>

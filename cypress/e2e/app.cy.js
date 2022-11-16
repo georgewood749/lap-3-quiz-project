@@ -163,4 +163,28 @@ describe("Join Game", () => {
     cy.get('[type="submit"]').should('be.disabled');
   })
 
+  it('submit button is abled when room ID is equal to the minimum value for a room ID i.e. 100000', () => {
+    cy.get('#join > :nth-child(1) > input').clear().type('100000');
+    cy.get('#join > :nth-child(2) > input').clear().type('testUsername');
+    cy.get('[type="submit"]').should('not.be.disabled').click();
+  })
+
+  it('submit button is abled when room ID is equal to the maximum value for a room ID i.e. 999999', () => {
+    cy.get('#join > :nth-child(1) > input').clear().type('999999');
+    cy.get('#join > :nth-child(2) > input').clear().type('testUsername');
+    cy.get('[type="submit"]').should('not.be.disabled').click();
+  })
+
+  it('submit button is disabled when room ID is under the minimum value for a room ID i.e. less than 100000', () => {
+    cy.get('#join > :nth-child(1) > input').clear().type('99999');
+    cy.get('#join > :nth-child(2) > input').clear().type('testUsername');
+    cy.get('[type="submit"]').should('be.disabled');
+  })
+
+  it('submit button is disabled when room ID is over the maximum value for a room ID i.e. more than 999999', () => {
+    cy.get('#join > :nth-child(1) > input').clear().type('1000000');
+    cy.get('#join > :nth-child(2) > input').clear().type('testUsername');
+    cy.get('[type="submit"]').should('be.disabled');
+  })
+
 })
