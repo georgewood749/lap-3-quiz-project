@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from 'react-redux'
-import { addPoints, nextQuestion } from "../../actions";
-import Timer from "../Timer";
-import he from "he";
 
 export default function Question(questionDetails) {
     const { question, category, difficulty, correct_answer, incorrect_answers } = questionDetails
@@ -43,7 +39,7 @@ export default function Question(questionDetails) {
 
                 </div>
                 <div id='timer'>
-                    <Timer />
+
                 </div>
             </div>
             <div id='question'>

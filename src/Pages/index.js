@@ -6,4 +6,4 @@ export { default as Lobby } from './Lobby';
 export { default as Menu } from './Menu';
 export { default as Results } from './Results';
 export { default as OfflineGame } from './OfflineGame';
-export { default as NotFound } from './NotFound'
+export { default as NotFound } from './NotFound';
