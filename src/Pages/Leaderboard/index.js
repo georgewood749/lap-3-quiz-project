@@ -6,8 +6,8 @@ export default function Leaderboard() {
 
 
     const fetchPoints = async () => {
-        const fetchURL = 'https://lap-3-quiz-backend.herokuapp.com/users/leaderboard'
-        // const fetchPointsData = 'http://localhost:3000/users/leaderboard'
+        // const fetchURL = 'https://lap-3-quiz-backend.herokuapp.com/users/leaderboard'
+        const fetchURL = 'http://localhost:3030/users/leaderboard'
         try {
             const pointsData = await axios.get(fetchURL)
             setUsersData(pointsData.data.users)
