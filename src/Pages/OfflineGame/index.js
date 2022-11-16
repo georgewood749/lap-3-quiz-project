@@ -33,12 +33,14 @@ export default function OfflineGame() {
         fetchQuestions(location.state.category, location.state.numQuestions, location.state.difficulty)
     }, [])
 
+    useEffect(() => {
+        if (finished) {
+            navigate('/results', { state: { p1: player1Score, p2: player2Score } });
+        }
+    }, [finished])
+
 
     const player = `Player ${playing} turn`
-    // const myTurn = true
-    // const turn = myTurn ? 'Your turn' : 'Wait'
-    // let timer = 10
-    // const otherPlayer = 'X'
 
     const fetchQuestions = async (category, numQuestions, difficulty) => {
         try {
@@ -52,46 +54,57 @@ export default function OfflineGame() {
 
     function handleSubmit(e) {
         const selected = e.target.textContent;
-        if (selected === correctAnswer && questionNumber <= 10) {
-            setPlayer1Score(prev => prev + 1)
-        }
-        setPlayer1Answer(selected);
-        if (questionNumber <= location.state.numQuestions) {
-            setQuestionNumber(prev => prev + 1)
-            questionDetails.shift()
-            setTimer(10);
-        } else {
-            setFinished(true);
-            navigate('./results')
-        }
-    }
-
-    function handleSubmit(e) {
-        const selected = e.target.textContent;
-        if (playing === 1) {
-            if (selected === correctAnswer && questionNumber <= location.state.numQuestions) {
+        if (selected === correctAnswer && questionNumber <= location.state.numQuestions) {
+            if (playing === 1) {
                 setPlayer1Score(prev => prev + 1)
-            }
-            setPlayer1Answer(selected);
-            setPlaying(2)
-        } else if (playing === 2) {
-            if (selected === correctAnswer && questionNumber <= location.state.numQuestions) {
+                // setPlaying(2)
+            } else {
                 setPlayer2Score(prev => prev + 1)
+                // setPlaying(1)
             }
-            setPlayer2Answer(selected)
-            if (questionNumber <= location.state.numQuestions) {
-                setQuestionNumber(prev => prev + 1)
-                questionDetails.shift()
-                setTimer(10);
+        }
+        if (questionNumber <= location.state.numQuestions) {
+            if (playing === 2) {
                 setPlaying(1)
+                questionDetails.shift()
+                setTimer(10)
+                setQuestionNumber(prev => prev + 1)
+            } else {
+                setTimer(10);
+                setPlaying(2)
             }
-
-
         } else {
             setFinished(true);
-            navigate('./results')
+            navigate('/results', { state: { p1: player1Score, p2: player2Score } })
         }
     }
+
+    // function handleSubmit(e) {
+    //     const selected = e.target.textContent;
+    //     if (playing === 1) {
+    //         if (selected === correctAnswer && questionNumber <= location.state.numQuestions) {
+    //             setPlayer1Score(prev => prev + 1)
+    //         }
+    //         setPlayer1Answer(selected);
+    //         setPlaying(2)
+    //     } else if (playing === 2) {
+    //         if (selected === correctAnswer && questionNumber <= location.state.numQuestions) {
+    //             setPlayer2Score(prev => prev + 1)
+    //         }
+    //         setPlayer2Answer(selected)
+    //         if (questionNumber <= location.state.numQuestions) {
+    //             setQuestionNumber(prev => prev + 1)
+    //             questionDetails.shift()
+    //             setTimer(10);
+    //             setPlaying(1)
+    //         }
+
+
+    //     } else {
+    //         setFinished(true);
+    //         navigate('/results', { state: { p1: player1Score, p2: player2Score } });
+    //     }
+    // }
 
     useEffect(() => {
         if (questionDetails[0]) {
@@ -127,7 +140,7 @@ export default function OfflineGame() {
                 setTimer(10);
             } else {
                 setFinished(true);
-                // navigate('/results')
+                navigate('/results', { state: { player1Score: player1Score, player2Score: player2Score } })
             }
         }
         // setTimer(10)
