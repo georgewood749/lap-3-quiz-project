@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { Question, Timer } from '../../components';
-var he = require('he')
-
 
 export default function OfflineGame() {
     const location = useLocation()
+    const navigate = useNavigate()
     const [questionDetails, setQuestionDetails] = useState([])
     const [question, setQuestion] = useState("")
     const [correctAnswer, setCorrectAnswer] = useState("")
@@ -15,11 +14,15 @@ export default function OfflineGame() {
     const [player1Answer, setPlayer1Answer] = useState("");
     const [player2Answer, setPlayer2Answer] = useState("");
     const [playing, setPlaying] = useState(1)
-    // const [questionNum, setQuestionNum] = useState()
-    let questionNumber = question.length
+    const [questionNumber, setQuestionNumber] = useState(1)
     const [timer, setTimer] = useState(10)
     const [finished, setFinished] = useState(false)
 
+    function decodeHtml(text) {
+        var txt = document.createElement("textarea");
+        txt.innerHTML = text;
+        return txt.value;
+    }
 
     useEffect(() => {
         fetchQuestions(location.state.category, location.state.numQuestions, location.state.difficulty)
@@ -27,60 +30,75 @@ export default function OfflineGame() {
 
 
     const player = `Player ${playing} turn`
-    const myTurn = true
+    // const myTurn = true
     // const turn = myTurn ? 'Your turn' : 'Wait'
     // let timer = 10
-    const otherPlayer = 'X'
+    // const otherPlayer = 'X'
 
-    const fetchQuestions = async (category, numQuestions, difficulty, type) => {
+    const fetchQuestions = async (category, numQuestions, difficulty) => {
         try {
             const { data } = await axios.get(`https://opentdb.com/api.php?amount=${numQuestions}&category=${category}&difficulty=${difficulty}&type=multiple`)
             const questionsArray = data.results
-            const questions = questionsArray.map(question => question.question)
-            const correctAnswers = questionsArray.map(question => question.correct_answer)
-            const incorrectAnswers = questionsArray.map(question => question.incorrect_answers)
             setQuestionDetails(questionsArray)
-            setQuestion(questions)
-            setCorrectAnswer(correctAnswers[0])
-            setIncorrectAnswers(incorrectAnswers[0])
-
+            // const questions = questionsArray.map(question => question.question)
+            // const correctAnswers = questionsArray.map(question => question.correct_answer)
+            // const incorrectAnswers = questionsArray.map(question => question.incorrect_answers)
+            // setQuestions(questions[0])
+            // setCorrectAnswer(correctAnswers[0])
+            // setIncorrectAnswers(incorrectAnswers[0])
             // return questionsArray;
         } catch (err) {
             throw new Error(err.message)
         }
     }
 
+    // comes up as undefined for first few seconds, throwing errors regarding index of undefined
+    console.log(questionDetails[0])
+
+
+
+
+    const handleSubmit = (e) => {
+
+    }
+
     useEffect(() => {
-        let answerArray = [];
-        // answerArray.push(he.decode(correctAnswer), he.decode(incorrectAnswers[0]), he.decode(incorrectAnswers[1]), he.decode(incorrectAnswers[2]));
-        answerArray.push(correctAnswer, incorrectAnswers[0], incorrectAnswers[1], incorrectAnswers[2])
+        if (!!questionDetails[0]) {
+            setCorrectAnswer(questionDetails[0].correct_answer)
+            setIncorrectAnswers(questionDetails[0].incorrect_answers)
+            setQuestion(questionDetails[0].question)
+            let answerArray = [];
+            // answerArray.push(he.decode(correctAnswer), he.decode(incorrectAnswers[0]), he.decode(incorrectAnswers[1]), he.decode(incorrectAnswers[2]));
+            answerArray.push(decodeHtml(correctAnswer), decodeHtml(incorrectAnswers[0]), decodeHtml(incorrectAnswers[1]), decodeHtml(incorrectAnswers[2]))
+            for (let i = answerArray.length - 1; i >= 1; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                let temp = answerArray[i];
+                answerArray[i] = answerArray[j];
+                answerArray[j] = temp;
+            }
+            setAnswerArray(answerArray);
 
-        for (let i = answerArray.length - 1; i >= 1; i--) {
-            let j = Math.floor(Math.random() * (i + 1));
-            let tempItem = answerArray[i];
-            answerArray[i] = answerArray[j];
-            answerArray[j] = tempItem;
+            function countdown() {
+                setTimer(prev => prev - 1)
+            }
+            const timer = setInterval(() => countdown(), 1000)
+            return () => clearInterval(timer)
         }
-        setAnswerArray(answerArray);
-
-        function countdown() {
-            setTimer(prev => prev - 1)
-        }
-        const timer = setInterval(() => countdown(), 1000)
-        return () => clearInterval(timer)
-    }, [question]);
+    }, [questionDetails[0], question]);
 
     useEffect(() => {
         if (timer < 1) {
             if (questionNumber <= location.state.numQuestions) {
-                questionNumber ++
-                // questionDetails.shift()
-                question.shift()
-                // correctAnswer.shift()
-                incorrectAnswers.shift()
+
+                setQuestionNumber(prev => prev + 1)
+
+                questionDetails.shift()
+                // questions.shift()
+                // incorrectAnswers.shift()
                 setTimer(10);
             } else {
                 setFinished(true);
+                // navigate('/results')
             }
         }
         // setTimer(10)
@@ -88,22 +106,22 @@ export default function OfflineGame() {
 
     return (
         // <div>
-        //     <Question questionNum={questionNumber} questionDetails={questionDetails[questionNumber - 1]} />
+        //     <Question questionDetails={questionDetails} />
         // </div>
         <div>
             <div id='gameHeader'>
                 <div id='player'>
                     {player}
                 </div>
-                {/* <div id='turn'>
-                    {turn}
-                </div> */}
+                <div id='turn'>
+                    {`Question ${questionNumber}/${location.state.numQuestions}`}
+                </div>
                 <div id='timer'>
                     {timer}
                 </div>
             </div>
             <div id='question'>
-                {question[0]}
+                {decodeHtml(question)}
             </div>
             <div id="progressBar">
                 <div id="progress"></div>
@@ -142,7 +160,6 @@ export default function OfflineGame() {
                     <input type='submit' value='Submit'></input>
 
                 </form>
-                <div id='otherPlayer' className='hide'><div>{otherPlayer} is playing...</div></div>
             </div>
         </div>
     )
