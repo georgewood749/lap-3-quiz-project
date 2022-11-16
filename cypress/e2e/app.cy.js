@@ -43,7 +43,7 @@ describe("Undefined routes are redirected to the not found page", () => {
     cy.viewport(1600, 900);
   })
 
-  it("opens 'not found' successfully and displays correct meessage", () => {
+  it("opens 'not found' successfully and displays correct message", () => {
     cy.visit('http://localhost:3000/idontexist');
     cy.contains('Page not found.');
   })
@@ -215,6 +215,20 @@ describe("Join Game", () => {
     cy.get('#join > :nth-child(2) > input').clear().type('testUsername');
     cy.get('[type="submit"]').should('be.disabled');
     cy.location('pathname').should('match', /\/join$/);
+  })
+
+})
+
+describe("Leaderboard", () => {
+  beforeEach(() => {
+    cy.viewport(1600, 900);
+    cy.visit('http://localhost:3000/leaderboard');
+  })
+
+  it('displays the top three players', () => {
+    cy.contains('🥇');
+    cy.contains('🥈');
+    cy.contains('🥉');
   })
 
 })
