@@ -9,18 +9,22 @@ describe("Expected routes exist", () => {
 
   it("opens create game form successfully", () => {
     cy.visit('http://localhost:3000/create');
+    cy.contains('Create Game');
   })
 
   it("opens join game form successfully", () => {
     cy.visit('http://localhost:3000/join');
+    cy.contains('Join Game');
   })
 
   it("opens leaderboard successfully", () => {
     cy.visit('http://localhost:3000/leaderboard');
+    cy.contains('Leaderboard');
   })
 
   it("opens lobby successfully", () => {
     cy.visit('http://localhost:3000/lobby');
+    cy.contains('Lobby');
   })
 
   it("opens game successfully", () => {
@@ -29,10 +33,19 @@ describe("Expected routes exist", () => {
 
   it("opens results successfully", () => {
     cy.visit('http://localhost:3000/results');
+    cy.contains('Podium');
   })
 
-  it("opens 'not found' successfully", () => {
-    cy.visit('http://localhost:3000/*');
+})
+
+describe("Undefined routes are redirected to the not found page", () => {
+  beforeEach(() => {
+    cy.viewport(1600, 900);
+  })
+
+  it("opens 'not found' successfully and displays correct meessage", () => {
+    cy.visit('http://localhost:3000/idontexist');
+    cy.contains('Page not found.');
   })
 
 })
