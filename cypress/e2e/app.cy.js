@@ -69,13 +69,49 @@ describe("Create Game", () => {
   })
 
   it('allows user to fill in the create game form and submit it', () => {
-    cy.visit('http://localhost:3000/');
-    cy.get('#create').click();
+    cy.visit('http://localhost:3000/create');
     cy.get('#difficulty').select('easy');
     cy.get('#numQuestions').type('10');
     cy.get('#category').select('9');
     cy.get('#questionType').select('multiple');
-    cy.get('[type="submit"]').click();
+    cy.get('[type="submit"]').should('not.be.disabled').click();
+  })
+
+  it('submit button is disabled for an empty form', () => {
+    cy.visit('http://localhost:3000/create');
+    cy.get('[type="submit"]').should('be.disabled');
+  })
+
+  it('submit button is disabled for an incomplete form - difficulty not selected', () => {
+    cy.visit('http://localhost:3000/create');
+    cy.get('#numQuestions').type('10');
+    cy.get('#category').select('9');
+    cy.get('#questionType').select('multiple');
+    cy.get('[type="submit"]').should('be.disabled');
+  })
+
+  it('submit button is disabled for an incomplete form - number of questions not selected', () => {
+    cy.visit('http://localhost:3000/create');
+    cy.get('#difficulty').select('easy');
+    cy.get('#category').select('9');
+    cy.get('#questionType').select('multiple');
+    cy.get('[type="submit"]').should('be.disabled');
+  })
+
+  it('submit button is disabled for an incomplete form - category not selected', () => {
+    cy.visit('http://localhost:3000/create');
+    cy.get('#difficulty').select('easy');
+    cy.get('#numQuestions').type('10');
+    cy.get('#questionType').select('multiple');
+    cy.get('[type="submit"]').should('be.disabled');
+  })
+
+  it('submit button is disabled for an incomplete form - type not selected', () => {
+    cy.visit('http://localhost:3000/create');
+    cy.get('#difficulty').select('easy');
+    cy.get('#numQuestions').type('10');
+    cy.get('#category').select('9');
+    cy.get('[type="submit"]').should('be.disabled');
   })
 
 })
@@ -86,11 +122,22 @@ describe("Join Game", () => {
   })
 
   it('allows user to fill in the join game form and submit it', () => {
-    cy.visit('http://localhost:3000/');
-    cy.get('#join').click();
+    cy.visit('http://localhost:3000/join');
     cy.get('#join > :nth-child(1) > input').clear().type('123456');
     cy.get('#join > :nth-child(2) > input').clear().type('testUsername');
-    cy.get('[type="submit"]').click();
+    cy.get('[type="submit"]').should('not.be.disabled').click();
+  })
+
+  it('submit button is disabled for an incomplete form - room ID field is empty', () => {
+    cy.visit('http://localhost:3000/join');
+    cy.get('#join > :nth-child(2) > input').clear().type('testUsername');
+    cy.get('[type="submit"]').should('be.disabled');
+  })
+
+  it('submit button is disabled for an incomplete form - username field is empty', () => {
+    cy.visit('http://localhost:3000/join');
+    cy.get('#join > :nth-child(1) > input').clear().type('123456');
+    cy.get('[type="submit"]').should('be.disabled');
   })
 
 })
