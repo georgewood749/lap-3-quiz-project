@@ -14,7 +14,7 @@ export default function CreateGame() {
     });
 
     function SubmitButton(){
-        if (gameInfo.difficulty && gameInfo.numQuestions && gameInfo.category && gameInfo.questionType){
+        if (gameInfo.difficulty && (gameInfo.numQuestions >= 5 && gameInfo.numQuestions <= 50) && gameInfo.category && gameInfo.questionType){
             return <input type='submit' value='Submit'></input>
         } else {
             return <input type='submit' value='Submit' disabled></input>
