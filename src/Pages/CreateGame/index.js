@@ -102,7 +102,7 @@ export default function CreateGame() {
 
                 {/* <label htmlFor="numQuestions">Number of Questions: </label> */}
                 <input type="number" 
-                id='numQuestions' 
+                id='numQuestions'
                 min={5} max={50} 
                 placeholder='Number of Questions' 
                 required 
