@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function Menu() {
     return (
         <div className='main'>
-            <h1>Game</h1>
+            <h1>Welcome</h1>
 
             <div className='center'>
                 <Link to='/create'>

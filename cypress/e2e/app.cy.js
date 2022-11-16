@@ -9,22 +9,18 @@ describe("Expected routes exist", () => {
 
   it("opens create game form successfully", () => {
     cy.visit('http://localhost:3000/create');
-    cy.contains('Create Game');
   })
 
   it("opens join game form successfully", () => {
     cy.visit('http://localhost:3000/join');
-    cy.contains('Join Game');
   })
 
   it("opens leaderboard successfully", () => {
     cy.visit('http://localhost:3000/leaderboard');
-    cy.contains('Leaderboard');
   })
 
   it("opens lobby successfully", () => {
     cy.visit('http://localhost:3000/lobby');
-    cy.contains('Lobby');
   })
 
   it("opens game successfully", () => {
@@ -33,7 +29,6 @@ describe("Expected routes exist", () => {
 
   it("opens results successfully", () => {
     cy.visit('http://localhost:3000/results');
-    cy.contains('Podium');
   })
 
 })
@@ -43,7 +38,11 @@ describe("Undefined routes are redirected to the not found page", () => {
     cy.viewport(1600, 900);
   })
 
-  it("opens 'not found' successfully and displays correct message", () => {
+  it("opens 'not found' successfully", () => {
+    cy.visit('http://localhost:3000/idontexist');
+  })
+
+  it("displays correct message", () => {
     cy.visit('http://localhost:3000/idontexist');
     cy.contains('Page not found.');
   })
@@ -55,6 +54,10 @@ describe("Menu", () => {
   beforeEach(() => {
     cy.viewport(1600, 900);
     cy.visit('http://localhost:3000/');
+  })
+
+  it("has the correct heading", () => {
+    cy.get('h1').contains('Welcome');
   })
 
   it('allows user to navigate from menu to create game form', () => {
@@ -78,6 +81,10 @@ describe("Create Game", () => {
   beforeEach(() => {
     cy.viewport(1600, 900);
     cy.visit('http://localhost:3000/create');
+  })
+
+  it("has the correct heading", () => {
+    cy.get('h1').contains('Create Game');
   })
 
   it('allows user to fill in the create game form and submit it', () => {
@@ -170,6 +177,10 @@ describe("Join Game", () => {
     cy.visit('http://localhost:3000/join');
   })
 
+  it("has the correct heading", () => {
+    cy.get('h1').contains('Join Game');
+  })
+
   it('allows user to fill in the join game form and submit it', () => {
     cy.get('#join > :nth-child(1) > input').clear().type('123456');
     cy.get('#join > :nth-child(2) > input').clear().type('testUsername');
@@ -225,10 +236,38 @@ describe("Leaderboard", () => {
     cy.visit('http://localhost:3000/leaderboard');
   })
 
+  it("has the correct heading", () => {
+    cy.get('h1').contains('Leaderboard');
+  })
+
   it('displays the top three players', () => {
     cy.contains('🥇');
     cy.contains('🥈');
     cy.contains('🥉');
+  })
+
+})
+
+describe("Lobby", () => {
+  beforeEach(() => {
+    cy.viewport(1600, 900);
+    cy.visit('http://localhost:3000/lobby');
+  })
+
+  it("has the correct heading", () => {
+    cy.get('h1').contains('Lobby');
+  })
+
+})
+
+describe("Results", () => {
+  beforeEach(() => {
+    cy.viewport(1600, 900);
+    cy.visit('http://localhost:3000/results');
+  })
+
+  it("has the correct heading", () => {
+    cy.get('h1').contains('Podium');
   })
 
 })
