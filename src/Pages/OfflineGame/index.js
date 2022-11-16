@@ -66,6 +66,33 @@ export default function OfflineGame() {
         }
     }
 
+    function handleSubmit(e) {
+        const selected = e.target.textContent;
+        if (playing === 1) {
+            if (selected === correctAnswer && questionNumber <= location.state.numQuestions) {
+                setPlayer1Score(prev => prev + 1)
+            }
+            setPlayer1Answer(selected);
+            setPlaying(2)
+        } else if (playing === 2) {
+            if (selected === correctAnswer && questionNumber <= location.state.numQuestions) {
+                setPlayer2Score(prev => prev + 1)
+            }
+            setPlayer2Answer(selected)
+            if (questionNumber <= location.state.numQuestions) {
+                setQuestionNumber(prev => prev + 1)
+                questionDetails.shift()
+                setTimer(10);
+                setPlaying(1)
+            }
+
+
+        } else {
+            setFinished(true);
+            navigate('./results')
+        }
+    }
+
     useEffect(() => {
         if (questionDetails[0]) {
             setCorrectAnswer(questionDetails[0].correct_answer)
