@@ -26,6 +26,14 @@ export default function JoinGame() {
 		navigate("/lobby");
 	};
 
+    function SubmitButton(){
+        if ((+roomID >= 100000 && +roomID <= 999999) && username){
+            return <input type='submit' value='Submit'></input>
+        } else {
+            return <input type='submit' value='Submit' disabled></input>
+        };
+    };
+
     return (
         <>
             <HomeButton />
@@ -44,7 +52,8 @@ export default function JoinGame() {
                     <label>Enter Username</label>
                 </div>
 
-                <input type='submit' value='Submit' disabled={!(roomID >= 100000 && roomID <= 999999) && username} />
+                <SubmitButton />
+                {/* <input type='submit' value='Submit' disabled={!(+roomID >= 100000 && +roomID <= 999999) && username} /> */}
 
             </form>
         </>
