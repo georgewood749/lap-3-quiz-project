@@ -137,7 +137,6 @@ export default function CreateGame() {
                 <br />
 
                 <Offline />
-                <br />
 
                 <div className="input_wrap" id='creator'>
                     <input required type="text" value={gameInfo.username} onChange={e => setGameInfo({ ...gameInfo, username: e.target.value })} />
