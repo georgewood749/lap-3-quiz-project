@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const questionsSlice = createSlice({
     name: 'questions',
     initialState: {
-        questions: null
+        questions: []
     },
     reducers: {
         store_questions: (state, action) => {

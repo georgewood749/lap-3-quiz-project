@@ -18,10 +18,10 @@ export default function OfflineGame() {
     const [timer, setTimer] = useState(10)
     const [finished, setFinished] = useState(false)
 
-    const [player1Answer, setPlayer1Answer] = useState("");
-    const [player2Answer, setPlayer2Answer] = useState("");
     const [player1Score, setPlayer1Score] = useState(0)
     const [player2Score, setPlayer2Score] = useState(0)
+
+    const player = `Player ${playing} turn`
 
     function decodeHtml(text) {
         var txt = document.createElement("textarea");
@@ -39,8 +39,6 @@ export default function OfflineGame() {
         }
     }, [finished])
 
-
-    const player = `Player ${playing} turn`
 
     const fetchQuestions = async (category, numQuestions, difficulty) => {
         try {
@@ -64,14 +62,14 @@ export default function OfflineGame() {
             }
         }
         if (questionNumber <= location.state.numQuestions) {
-            if (playing === 2) {
-                setPlaying(1)
-                questionDetails.shift()
-                setTimer(10)
-                setQuestionNumber(prev => prev + 1)
-            } else {
-                setTimer(10);
+            if (playing === 1) {
                 setPlaying(2)
+                setTimer(10)
+            } else {
+                questionDetails.shift()
+                setQuestionNumber(prev => prev + 1)
+                setTimer(10);
+                setPlaying(1)
             }
         } else {
             setFinished(true);
@@ -140,7 +138,7 @@ export default function OfflineGame() {
                 setTimer(10);
             } else {
                 setFinished(true);
-                navigate('/results', { state: { player1Score: player1Score, player2Score: player2Score } })
+                navigate('/results', { state: { p1: player1Score, p2: player2Score } })
             }
         }
         // setTimer(10)
