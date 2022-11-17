@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { CreateGame, JoinGame, Leaderboard, Menu, NotFound, Game, Lobby, Results, OfflineGame } from './Pages';
+import { CreateGame, JoinGame, Leaderboard, Menu, NotFound, Game, Lobby, Results, OfflineGame } from './pages';
 import { useDispatch, useSelector } from "react-redux";
 import { addPoints, finish, newUser, saveSocket, updateState } from './actions';
 const io = require("socket.io-client");
