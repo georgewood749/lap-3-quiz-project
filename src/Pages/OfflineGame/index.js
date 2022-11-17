@@ -144,11 +144,11 @@ export default function OfflineGame() {
     return (
         <div>
             <div id='gameHeader'>
-                <div id='player'>
-                    {player}
-                </div>
                 <div id='turn'>
                     {`Question ${quizProgress}`}
+                </div>
+                <div id='player'>
+                    {player}
                 </div>
                 <div id='timer'>
                     {timer}
