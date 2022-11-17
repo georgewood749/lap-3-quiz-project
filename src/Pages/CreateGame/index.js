@@ -27,7 +27,7 @@ export default function CreateGame() {
 
     function Online() {
         if (gameInfo.difficulty && (gameInfo.numQuestions >= 5 && gameInfo.numQuestions <= 50) && gameInfo.category && username) {
-            return <input type='submit' value='Online'></input>
+            return <input type='submit' value='Online' onClick={handleSubmit}></input>
         } else {
             return <input type='submit' value='Online' disabled></input>
         };
