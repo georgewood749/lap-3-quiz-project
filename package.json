@@ -44,7 +44,8 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^11.1.0",
-    "@babel/preset-env": "^7.20.2"
+    "@babel/preset-env": "^7.20.2",
+    "@cypress/code-coverage": "^3.10.0",
+    "cypress": "^11.1.0"
   }
 }

@@ -49,9 +49,9 @@ export default function OfflineGame() {
                 setTimer(10)
             } else {
                 questionDetails.shift()
-                setQuestionNumber(prev => prev + 1)
                 setTimer(10);
                 setPlaying(1)
+                setQuestionNumber(prev => prev + 1)
             }
         } else {
             setFinished(true);
@@ -114,6 +114,22 @@ export default function OfflineGame() {
         }
     }, [timer])
 
+    let progress = (questionNumber / location.state.numQuestions) * 100
+    const customStyle = {
+        width: '0%'
+    }
+    if (progress > 100) {
+        progress = 100
+    }
+    customStyle.width = `${progress}%`
+
+    let quizProgress
+    if (questionNumber > location.state.numQuestions) {
+        quizProgress = `${location.state.numQuestions}/${location.state.numQuestions}`
+    } else {
+        quizProgress = `${questionNumber}/${location.state.numQuestions}`
+    }
+
     return (
         <div>
             <div id='gameHeader'>
@@ -121,7 +137,7 @@ export default function OfflineGame() {
                     {player}
                 </div>
                 <div id='turn'>
-                    {`Question ${questionNumber}/${location.state.numQuestions}`}
+                    {`Question ${quizProgress}`}
                 </div>
                 <div id='timer'>
                     {timer}
@@ -131,7 +147,7 @@ export default function OfflineGame() {
                 {decodeHtml(question)}
             </div>
             <div id="progressBar">
-                <div id="progress"></div>
+                <div id="progress" style={customStyle}></div>
             </div>
             <div id='answerBox'>
 
