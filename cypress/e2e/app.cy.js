@@ -96,6 +96,42 @@ describe("Create Game", () => {
     cy.location('pathname').should('match', /\/offline$/);
   })
 
+  it('can create an offline game with the minimum threshold for number of questions i.e. 5', () => {
+    cy.get('#difficulty').select('easy');
+    cy.get('#numQuestions').type('5');
+    cy.get('#category').select('9');
+    cy.get('#online').should('be.disabled');
+    cy.get('#offline').should('not.be.disabled').click();
+    cy.location('pathname').should('match', /\/offline$/);
+  })
+
+  it('can create an offline game with the maximum threshold for number of questions i.e. 50', () => {
+    cy.get('#difficulty').select('easy');
+    cy.get('#numQuestions').type('50');
+    cy.get('#category').select('9');
+    cy.get('#online').should('be.disabled');
+    cy.get('#offline').should('not.be.disabled').click();
+    cy.location('pathname').should('match', /\/offline$/);
+  })
+
+  it('cannot create an offline game with number of questions under the minimum threshold i.e. less than 5', () => {
+    cy.get('#difficulty').select('easy');
+    cy.get('#numQuestions').type('4');
+    cy.get('#category').select('9');
+    cy.get('#online').should('be.disabled');
+    cy.get('#offline').should('be.disabled');
+    cy.location('pathname').should('match', /\/create$/);
+  })
+
+  it('cannot create an offline game with number of questions over the maximum threshold i.e. more than 50', () => {
+    cy.get('#difficulty').select('easy');
+    cy.get('#numQuestions').type('51');
+    cy.get('#category').select('9');
+    cy.get('#online').should('be.disabled');
+    cy.get('#offline').should('be.disabled');
+    cy.location('pathname').should('match', /\/create$/);
+  })
+
   it('cannot create an offline game without selecting difficulty', () => {
     cy.get('#numQuestions').type('10');
     cy.get('#category').select('9');
