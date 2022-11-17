@@ -22,17 +22,19 @@ export default function CreateGame() {
 
     const [Qs, setQs] = useState([])
 
+    const [username, setUsername] = useState('')
 
-    function SubmitButton() {
-        if (gameInfo.difficulty && gameInfo.numQuestions && gameInfo.category) {
-            return <input type='submit' value='Submit'></input>
+
+    function Online() {
+        if (gameInfo.difficulty && (gameInfo.numQuestions >= 5 && gameInfo.numQuestions <= 50) && gameInfo.category && username) {
+            return <input type='submit' value='Online'></input>
         } else {
-            return <input type='submit' value='Submit' disabled></input>
+            return <input type='submit' value='Online' disabled></input>
         };
     };
 
-    function SubmitButtonOffline() {
-        if (gameInfo.difficulty && gameInfo.numQuestions && gameInfo.category) {
+    function Offline() {
+        if (gameInfo.difficulty && (gameInfo.numQuestions >= 5 && gameInfo.numQuestions <= 50) && gameInfo.category) {
             return <input type='submit' value='Offline' onClick={handleSubmitOffline}></input>
         } else {
             return <input type='submit' value='Offline' disabled></input>
@@ -82,7 +84,7 @@ export default function CreateGame() {
                 id: Math.random() * 1000
             }
         ]);
-        navigate('/');
+        navigate('/lobby');
     };
 
     const handleSubmitOffline = (e) => {
@@ -122,31 +124,33 @@ export default function CreateGame() {
         <div className='main'>
             <h1>Create Game</h1>
             <form id='create' className='center' onSubmit={handleSubmit}>
-                <input id="username" placeholder='Enter username' />
-                <br />
 
-                <label htmlFor="difficulty">Difficulty: </label>
+                {/* <label htmlFor="difficulty">Difficulty: </label> */}
                 <select id="difficulty"
                     value={gameInfo.difficulty}
                     onChange={handleDifficultyChange}>
-                    <option value="">- - Please select - -</option>
+                    <option value="">Difficulty</option>
                     <option value="easy">Easy</option>
                     <option value="medium">Medium</option>
                     <option value="hard">Hard</option>
                 </select>
                 <br/>
 
-                <label htmlFor="numQuestions">Number of Questions: </label>
-                <input type="number" id='numQuestions' min={5} max={50} required
-                    value={gameInfo.numQuestions}
-                    onChange={handleNumQuestionsChange}></input>
+                {/* <label htmlFor="numQuestions">Number of Questions: </label> */}
+                <input type="number" 
+                id='numQuestions'
+                min={5} max={50} 
+                placeholder='Number of Questions' 
+                required 
+                value={gameInfo.numQuestions} 
+                onChange={handleNumQuestionsChange}></input>
                 <br />
 
-                <label htmlFor="category">Category: </label>
+                {/* <label htmlFor="category">Category: </label> */}
                 <select id="category"
                     value={gameInfo.category}
                     onChange={handleCategoryChange}>
-                    <option value="">- - Please select - -</option>
+                    <option value="">Category</option>
                     <option value={9}>General Knowledge</option>
                     <option value={10}>Books</option>
                     <option value={11}>Film</option>
@@ -174,8 +178,18 @@ export default function CreateGame() {
                 </select>
                 <br />
 
-                <SubmitButton />
-                <SubmitButtonOffline />
+                <Offline />
+                <br />
+
+                {/* <input id="username" placeholder='Enter username' />
+                <br /> */}
+                <div className="input_wrap">
+                    <input required type="text" value={username} onChange={ e => setUsername(e.target.value) } />
+                    <label>Enter Username</label>
+                </div>
+
+                <Online />
+                
 
             </form>
         </div>
