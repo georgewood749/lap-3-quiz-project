@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import { HomeButton } from '../../components';
+import { BackButton } from '../../components';
 
 export default function JoinGame() {
 
@@ -25,6 +26,7 @@ export default function JoinGame() {
     return (
         <>
             <HomeButton />
+            <BackButton />
             <h1>Join Game</h1>
             <form id='join' className='center main' onSubmit={handleSubmit}>
                 <div className="input_wrap">

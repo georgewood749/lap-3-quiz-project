@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import axios from 'axios'
+import { HomeButton } from '../../components'
 
 
 export default function Results() {
@@ -43,6 +44,7 @@ export default function Results() {
     }
     return (
         <div>
+            <HomeButton />
             <h1>Results</h1>
             <h2>Player 1 scored {p1} points</h2>
             <h2>Player 2 scored {p2} points</h2>

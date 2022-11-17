@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { HomeButton } from '../../components'
+import { BackButton } from '../../components'
 
 export default function Leaderboard() {
     const [usersData, setUsersData] = useState([])
@@ -48,6 +49,7 @@ export default function Leaderboard() {
     return (
         <div>
             <HomeButton />
+            <BackButton />
             <h1>Leaderboard</h1>
             {renderLeaderboard}
         </div>

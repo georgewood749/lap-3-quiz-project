@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { saveUser } from '../../actions';
 import { store_questions } from '../../actions/questions/questionsSlice';
 import { HomeButton } from '../../components';
+import { BackButton } from '../../components';
 
 export default function CreateGame() {
     const navigate = useNavigate()
@@ -124,6 +125,7 @@ export default function CreateGame() {
     return (
         <>
             <HomeButton />
+            <BackButton />
             <h1>Create Game</h1>
             <form id='create' className='center main' onSubmit={handleSubmit}>
 

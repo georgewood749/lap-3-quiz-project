@@ -7,9 +7,8 @@ export default function Menu() {
     return (
         <>
             <HomeButton />
+            <h1>Welcome to AGTK Quiz</h1>
             <div className='main' id='menu'>
-                <h1>Welcome to AGTK Quiz</h1>
-
                 <div className='center'>
                     <Link to='/create'>
                         <button id='create'>Create Game</button>
