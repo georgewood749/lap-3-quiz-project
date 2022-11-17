@@ -115,6 +115,7 @@ fieldset legend {
 
 h1 {
   font-size: 300%;
+  text-align: center;
 }
 
 input[type="text"] {
@@ -384,12 +385,12 @@ form#create {
   cursor: pointer
 }
 
-/* #answer1:hover,
+#answer1:hover,
 #answer2:hover,
 #answer3:hover,
 #answer4:hover {
   background-color: rgba(255, 255, 255, 0.25);
-} */
+}
 
 select option {
   background: rgba(0, 0, 0, 0.3);
@@ -405,5 +406,20 @@ select option {
 #a2:hover ~ label #answer2,
 #a3:hover ~ label #answer3,
 #a4:hover ~ label #answer4 {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.offlineResults {
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  font-size: 200%;
+}
+
+#player1_2 {
+  margin: auto;
+  width: 40%;
+  border: solid 2px white;
+  border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.25);
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { HomeButton } from '../../components'
 
 
 export default function Results() {
@@ -18,12 +19,10 @@ export default function Results() {
 
     return (
         <div>
+            <HomeButton />
             <h1>
                 Podium
             </h1>
-            <div id='winner'>
-                Congratulations first!
-            </div>
             {results}
             {/* <div className='leaderboardRow'>
                 <h2>first 🥇</h2>
