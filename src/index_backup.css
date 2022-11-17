@@ -1,11 +1,13 @@
-@import url(‘https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap’);
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
 body,
 html {
   height: 100%;
   margin: 0;
 }
+
 body {
-  font-family: ‘Poppins’, sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-image: linear-gradient(to bottom, #917AEB, #3DB6DC);
   height: 100%;
   background-position: center;
@@ -13,28 +15,32 @@ body {
   background-size: cover;
   color: white;
 }
+
 #homeButton {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  width: 10%;
+	position: fixed;
+	top: 10px;
+	left: 10px;
+	width: 10%;
 }
+
 #back {
-  width: 5%;
-  color: white;
-  font-size: 20px;
-  border: 1px solid white;
-  border-radius: 5px;
-  text-align: center;
-  margin: 5px;
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  padding: 5px;
+	width: 5%;
+	color: white;
+	font-size: 20px;
+	border: 1px solid white;
+	border-radius: 5px;
+	text-align: center;
+	margin: 5px;
+	position: fixed;
+	top: 10px;
+	right: 10px;
+	padding: 5px;
 }
+
 #back:hover {
   color: black;
 }
+
 .main {
   position: fixed;
   top: 50%;
@@ -42,15 +48,19 @@ body {
   transform: translate(-50%, -50%);
   min-width: 40%;
 }
+
 #menu {
   min-width: 70%;
 }
+
 button#create {
   margin-top: 50px;
 }
+
 button#join {
   margin-bottom: 50px;
 }
+
 button#leaderboard {
   position: absolute;
   left: 50%;
@@ -58,6 +68,7 @@ button#leaderboard {
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%)
 }
+
 .center {
   border: solid 3px white;
   border-radius: 20px;
@@ -67,6 +78,7 @@ button#leaderboard {
   margin: 20px auto;
   padding: 40px 0;
 }
+
 button {
   width: 300px;
   margin: 10px;
@@ -75,13 +87,15 @@ button {
   font-size: 200%;
   background-color: hsla(0, 0%, 100%, 0.25);
   color: white;
-  font-family: ‘Poppins’, sans-serif;
+  font-family: 'Poppins', sans-serif;
   padding: 0;
 }
+
 button:hover {
   background-color: white;
   color: black;
 }
+
 fieldset {
   border-top: 3px solid white;
   border-bottom: none;
@@ -92,17 +106,20 @@ fieldset {
   padding: 0;
   font-size: 150%;
   width: 100%;
-  font-family: ‘Poppins’, sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
+
 fieldset legend {
   padding: 5px 10px;
 }
+
 h1 {
   font-size: 300%;
 }
-input[type=“text”] {
+
+input[type="text"] {
   border: 2px solid white;
-  font-family: ‘Poppins’, sans-serif;
+  font-family: 'Poppins', sans-serif;
   border-radius: 10px;
   height: 50px;
   width: 100%;
@@ -114,6 +131,7 @@ input[type=“text”] {
   margin-bottom: 10px;
   padding: 10px 5px 5px 5px;
 }
+
 input:focus+label,
 input:valid+label {
   font-size: 12px;
@@ -123,23 +141,26 @@ input:valid+label {
   background: none;
   padding: 0px 5px 0px 5px;
 }
+
 #creator {
-  width: 102%;
-  height:auto;
+  width: 102%; 
+  height:auto; 
   position:relative;
   margin-right: 16px;
   margin-left: 2px;
   /* margin: auto; */
 }
+
 .input_wrap:not(#creator) {
   width: 90%;
   height: auto;
   position: relative;
   margin-right: 10px;
 }
+
 .input_wrap label {
   color: white;
-  font-family: ‘Poppins’, sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 150%;
   padding: 15px;
   margin: 0;
@@ -151,7 +172,8 @@ input:valid+label {
   -webkit-transition: 0.2s ease all;
   pointer-events: none;
 }
-input[type=‘submit’]:disabled {
+
+input[type='submit']:disabled {
   border: solid 1px white;
   background-color: rgba(255, 255, 255, 0.25);
   color: white;
@@ -159,9 +181,10 @@ input[type=‘submit’]:disabled {
   margin: 0;
   border-radius: 10px;
   font-size: 150%;
-  font-family: ‘Poppins’, sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
-input[type=‘submit’] {
+
+input[type='submit'] {
   border: solid 1px black;
   background-color: white;
   color: black;
@@ -169,9 +192,10 @@ input[type=‘submit’] {
   margin: 0;
   border-radius: 10px;
   font-size: 150%;
-  font-family: ‘Poppins’, sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
-input[type=‘submit’]:hover:not(:disabled) {
+
+input[type='submit']:hover:not(:disabled) {
   border: solid 1px white;
   background-color: black;
   color: white;
@@ -179,18 +203,20 @@ input[type=‘submit’]:hover:not(:disabled) {
   margin: 0;
   border-radius: 10px;
   font-size: 150%;
-  font-family: ‘Poppins’, sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
+
 form#join {
   padding: 35px 10px;
 }
-input[type=‘number’],
+
+input[type='number'],
 select {
   width: 100%;
   border: solid 1px white;
   border-radius: 10px;
   font-size: 150%;
-  font-family: ‘Poppins’, sans-serif;
+  font-family: 'Poppins', sans-serif;
   padding: 10px;
   background-color: rgba(255, 255, 255, 0.25);
   color: white;
@@ -199,12 +225,15 @@ select {
   box-sizing: content-box;
   -webkit-box-sizing: content-box;
 }
-input[type=‘number’]::placeholder {
+
+input[type='number']::placeholder {
   color: white;
 }
+
 form#create {
   padding: 30px;
 }
+
 #lobbyID {
   border: 3px solid white;
   border-radius: 10px;
@@ -214,15 +243,18 @@ form#create {
   font-size: 150%;
   padding: 10px 0;
 }
+
 #lobby {
   width: 60%;
 }
+
 #gameHeader {
   display: flex;
   justify-content: space-between;
   width: 95%;
   margin: auto;
 }
+
 #player,
 #timer {
   border: 1px solid white;
@@ -232,11 +264,13 @@ form#create {
   padding: 10px;
   font-size: 150%;
 }
+
 #turn {
   margin: 20px 0;
   padding: 10px;
   font-size: 150%;
 }
+
 #question {
   width: 95%;
   margin: 20px auto;
@@ -246,6 +280,7 @@ form#create {
   padding: 20px 0;
   font-size: 150%;
 }
+
 #progressBar {
   width: 50%;
   border: solid white 1px;
@@ -253,6 +288,7 @@ form#create {
   margin: auto;
   width: 95%;
 }
+
 #progress {
   background-color: rgb(255, 255, 255);
   width: 0%;
@@ -261,6 +297,7 @@ form#create {
   margin: 0;
   height: 15px;
 }
+
 #answerBox {
   width: 95%;
   margin: 20px auto;
@@ -270,25 +307,30 @@ form#create {
   font-size: 150%;
   height: 450px;
 }
+
 #answerForm {
   display: flex;
   flex-direction: column;
 }
-#answerForm>input[type=‘submit’] {
+
+#answerForm>input[type='submit'] {
   width: 10%;
   margin: auto;
   font-size: 100%;
 }
+
 #otherPlayer {
   position: relative;
   height: 100%;
 }
+
 #otherPlayer>div {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .leaderboardRow {
   display: flex;
   justify-content: space-between;
@@ -298,9 +340,11 @@ form#create {
   border-radius: 10px;
   padding: 0 10px;
 }
+
 .leaderboardRow:hover {
   background-color: rgba(255, 255, 255, 0.25);
 }
+
 #winner {
   width: 60%;
   margin: 10px auto;
@@ -310,15 +354,19 @@ form#create {
   font-size: 150%;
   background-color: rgba(255, 255, 255, 0.25);
 }
+
 .hide {
   display: none !important;
 }
+
+
 #a1,
 #a2,
 #a3,
 #a4 {
   display: none
 }
+
 #answer1,
 #answer2,
 #answer3,
@@ -335,9 +383,16 @@ form#create {
   color: white;
   cursor: pointer
 }
+
 #answer1:hover,
 #answer2:hover,
 #answer3:hover,
 #answer4:hover {
   background-color: rgba(255, 255, 255, 0.25);
+}
+
+select option {
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
 }
