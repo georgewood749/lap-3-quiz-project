@@ -22,10 +22,9 @@ export default function JoinGame() {
 	};
 
     return (
-        <div className='main'>
+        <>
             <h1>Join Game</h1>
-
-            <form id='join' className='center' onSubmit={handleSubmit}>
+            <form id='join' className='center main' onSubmit={handleSubmit}>
                 <div className="input_wrap">
                     <input required type="text" value={roomID} onChange={ e => setRoomID(e.target.value) } />
                     <label>Enter Room ID</label>
@@ -37,9 +36,7 @@ export default function JoinGame() {
                 </div>
 
                 <SubmitButton/>
-                {/* <input type='submit' value='Submit'></input> */}
             </form>
-
-        </div>
+        </>
     )
 }

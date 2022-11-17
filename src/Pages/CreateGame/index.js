@@ -121,9 +121,9 @@ export default function CreateGame() {
 
 
     return (
-        <div className='main'>
+        <>
             <h1>Create Game</h1>
-            <form id='create' className='center' onSubmit={handleSubmit}>
+            <form id='create' className='center main' onSubmit={handleSubmit}>
 
                 {/* <label htmlFor="difficulty">Difficulty: </label> */}
                 <select id="difficulty"
@@ -192,6 +192,7 @@ export default function CreateGame() {
                 
 
             </form>
-        </div>
+        </>
+        
     )
 }
