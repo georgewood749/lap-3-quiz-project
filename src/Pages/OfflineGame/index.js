@@ -60,7 +60,7 @@ export default function OfflineGame() {
             }
         } else {
             setFinished(true);
-            navigate('/results', { state: { p1: player1Score, p2: player2Score } })
+            navigate('/offline_results', { state: { p1: player1Score, p2: player2Score } })
         }
     }
 
@@ -76,7 +76,7 @@ export default function OfflineGame() {
 
     useEffect(() => {
         if (finished) {
-            navigate('/results', { state: { p1: player1Score, p2: player2Score } });
+            navigate('/offline_results', { state: { p1: player1Score, p2: player2Score } });
         }
     }, [finished])
 
@@ -120,7 +120,7 @@ export default function OfflineGame() {
                 }
             } else {
                 setFinished(true);
-                navigate('/results', { state: { p1: player1Score, p2: player2Score } })
+                navigate('/offline_results', { state: { p1: player1Score, p2: player2Score } })
             }
         }
     }, [timer])
@@ -178,39 +178,6 @@ export default function OfflineGame() {
                     {answerArray[3]}
                 </div>
 
-                {/* <form id='answerForm'>
-
-                    <input type='radio' name='answer' value={1} id='a1'></input>
-                    <label htmlFor="a1">
-                        <div id="answer1">
-                            {answerArray[0]}
-                        </div>
-                    </label>
-
-                    <input type='radio' name='answer' value={2} id='a2'></input>
-                    <label htmlFor="a2">
-                        <div id="answer2">
-                            {answerArray[1]}
-                        </div>
-                    </label>
-
-                    <input type='radio' name='answer' value={3} id='a3'></input>
-                    <label htmlFor="a3">
-                        <div id="answer3">
-                            {answerArray[2]}
-                        </div>
-                    </label>
-
-                    <input type='radio' name='answer' value={4} id='a4'></input>
-                    <label htmlFor="a4">
-                        <div id="answer4">
-                            {answerArray[3]}
-                        </div>
-                    </label>
-
-                    <input type='submit' value='Submit'></input>
-
-                </form> */}
             </div>
         </div>
     )
