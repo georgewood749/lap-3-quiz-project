@@ -98,9 +98,12 @@ input:valid+label {
 }
 
 #creator {
-  width: 100%;
-  height: auto;
-  position: relative;
+  width: 102%; 
+  height:auto; 
+  position:relative;
+  margin-right: 16px;
+  margin-left: 2px;
+  /* margin: auto; */
 }
 
 .input_wrap:not(#creator) {
