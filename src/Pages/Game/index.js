@@ -104,7 +104,6 @@ export default function Game() {
                 <input type='radio' name='answer' value={content.answers[0]} checked={answer === content.answers[0]} onChange={handleChange} id='a1'></input>
                     <label htmlFor="a1">
                     <div id="answer1">
-                        {/* a. answer 1 */}
                         {decodeHtml(content.answers[0])}
                     </div>
                     </label>
@@ -112,7 +111,6 @@ export default function Game() {
                     <input type='radio' name='answer' value={content.answers[1]} checked={answer === content.answers[1]} onChange={handleChange} id='a2'></input>
                     <label htmlFor="a2">
                     <div id="answer2">
-                        {/* b. answer 2 */}
                         {decodeHtml(content.answers[1])}
                     </div>
                     </label>
@@ -120,7 +118,6 @@ export default function Game() {
                     <input type='radio' name='answer' value={content.answers[2]} checked={answer === content.answers[2]} onChange={handleChange} id='a3'></input>
                     <label htmlFor="a3">
                     <div id="answer3">
-                        {/* c. answer 3 */}
                         {decodeHtml(content.answers[2])}
                     </div>
                     </label>
@@ -128,7 +125,6 @@ export default function Game() {
                     <input type='radio' name='answer' value={content.answers[3]} checked={answer === content.answers[3]} onChange={handleChange} id='a4'></input>
                     <label htmlFor="a4">
                     <div id="answer4">
-                        {/* d. answer 4 */}
                         {decodeHtml(content.answers[3])}
                     </div>
                     </label>
@@ -141,40 +137,3 @@ export default function Game() {
         </div>
     )
 }
-
-//                     <input type='radio' name='answer' value={1} id='a1'></input>
-//                     <label for="a1">
-//                     <div id="answer1">
-//                         a. answer 1
-//                     </div>
-//                     </label>
-
-//                     <input type='radio' name='answer' value={2} id='a2'></input>
-//                     <label for="a2">
-//                     <div id="answer2">
-//                         b. answer 2
-//                     </div>
-//                     </label>
-
-//                     <input type='radio' name='answer' value={3} id='a3'></input>
-//                     <label for="a3">
-//                     <div id="answer3">
-//                         c. answer 3
-//                     </div>
-//                     </label>
-
-//                     <input type='radio' name='answer' value={4} id='a4'></input>
-//                     <label for="a4">
-//                     <div id="answer4">
-//                         d. answer 4
-//                     </div>
-//                     </label>
-
-//                     <input type='submit' value='Submit'></input>
-
-//                 </form>
-//                 <div id='otherPlayer' className='hide'><div>{room.players.length} is playing...</div></div>
-//             </div>
-//         </div>
-//     )
-// }
