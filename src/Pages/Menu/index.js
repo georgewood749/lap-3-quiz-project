@@ -1,11 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../../images/logo.png'
 
 export default function Menu() {
     return (
         <>
-            <h1>Welcome</h1>
             <div className='main' id='menu'>
+            <div>
+                <img src={logo} alt='logo' height={"100px"} />
+                <h1>Welcome to AGTK Quiz</h1>
+            </div>
 
                 <div className='center'>
                     <Link to='/create'>
