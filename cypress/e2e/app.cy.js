@@ -253,3 +253,30 @@ describe("Leaderboard", () => {
   })
 
 })
+
+describe("Game Play", () => {
+  beforeEach(() => {
+    cy.viewport(1600, 900);
+    cy.visit('http://localhost:3000/create');
+  })
+
+  it('offline game', () => {
+    cy.get('#difficulty').select('easy');
+    cy.get('#numQuestions').type('10');
+    cy.get('#category').select('9');
+    cy.get('#online').should('be.disabled');
+    cy.get('#offline').should('not.be.disabled').click();
+    cy.location('pathname').should('match', /\/offline$/);
+    cy.get('#player')
+    cy.get('#turn')
+    cy.get('#timer')
+    cy.get('#question')
+    cy.get('#progressBar')
+    cy.get('#progress')
+    cy.get('#answer1')
+    cy.get('#answer2')
+    cy.get('#answer3')
+    cy.get('#answer4')
+  })
+
+})
