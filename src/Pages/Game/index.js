@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { store_answers } from '../../actions/socket/socketSlice';
+import { store_answers, sync_socres } from '../../actions/socket/socketSlice';
 
 
 export default function Game() {
@@ -10,9 +10,10 @@ export default function Game() {
     const navigate = useNavigate();
 
     const qa = useSelector(state => state.socket.qa);
-    const username = useSelector(state => state.socket.user.username);
-    const scores = useSelector(state => state.socket.user.scores);
+    const user = useSelector(state => state.socket.user);
+    const roomID = useSelector(state => state.socket.room.roomID);
     const socket = useSelector(state => state.socket.socket);
+    const submittedAns = useSelector(state => state.socket.submittedAns);
 
     const [ content, setContent] = useState({ question: "Question", answers: [ "" ] })
     const [ answer, setAnswer ] = useState("")
@@ -24,7 +25,19 @@ export default function Game() {
         mixed_answers.splice(ranIdx, 0, correct_answer)
         return mixed_answers
     }
+
+    function decodeHtml(text) {
+        var txt = document.createElement("textarea");
+        txt.innerHTML = text;
+        return txt.value;
+    }
     
+    useEffect(() => {
+        socket.on('sync-scores', ( id, username, scores )=>{
+            dispatch(sync_socres({ id: id, username: username, scores: scores }))
+        })
+    },[])
+
     useEffect(() => {
         setContent({ 
             question: qa.contents[nQsAnsed].question, 
@@ -32,23 +45,33 @@ export default function Game() {
         })
     }, [nQsAnsed])
 
+    useEffect(() => {
+        if(submittedAns.length){
+            qa.settings.amount === (nQsAnsed + 1)?  submitAnswers() : updateScores()
+        }
+    }, [submittedAns])
+
     const handleChange = (e) => {
         if(e.target.checked) {
             setAnswer(e.target.value)
         }
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(`${nQsAnsed}/${qa.settings.amount} : ${answer}`);
         dispatch(store_answers({questionNo: nQsAnsed, answer: answer}))
-        qa.settings.amount === (nQsAnsed + 1)?  submitAnswers() : setNQsAnsed(prev => prev + 1);
+    }
+
+    function updateScores(){
+        socket.emit('update-scores', roomID, socket.id, user.username, user.scores)
+        setNQsAnsed(prev => prev + 1);
     }
 
     function submitAnswers(){
-        setNQsAnsed(prev => prev = 0) // Loop back for Dev
-        // socket.emit('submit-results', username, scores)
-        // navigate('/results');
+        // setNQsAnsed(prev => prev = 0) // Loop back for Dev
+        socket.emit('submit-results', user.username, user.scores)
+        navigate('/results');
     }
 
     
@@ -62,7 +85,7 @@ export default function Game() {
         <div>
             <div id='gameHeader'>
                 <div id='player'>
-                    {username}
+                    {user.username}
                 </div>
                 <div id='turn'>
                     {turn}
@@ -72,8 +95,7 @@ export default function Game() {
                 </div>
             </div>
             <div id='question'>
-                {/* Question */}
-                {content.question}
+                {decodeHtml(content.question)}
             </div>
             <div id="progressBar">
                 <div id="progress"></div>
@@ -85,7 +107,7 @@ export default function Game() {
                     <label htmlFor="a1">
                     <div id="answer1">
                         {/* a. answer 1 */}
-                        {content.answers[0]}
+                        {decodeHtml(content.answers[0])}
                     </div>
                     </label>
 
@@ -93,7 +115,7 @@ export default function Game() {
                     <label htmlFor="a2">
                     <div id="answer2">
                         {/* b. answer 2 */}
-                        {content.answers[1]}
+                        {decodeHtml(content.answers[1])}
                     </div>
                     </label>
 
@@ -101,7 +123,7 @@ export default function Game() {
                     <label htmlFor="a3">
                     <div id="answer3">
                         {/* c. answer 3 */}
-                        {content.answers[2]}
+                        {decodeHtml(content.answers[2])}
                     </div>
                     </label>
 
@@ -109,7 +131,7 @@ export default function Game() {
                     <label htmlFor="a4">
                     <div id="answer4">
                         {/* d. answer 4 */}
-                        {content.answers[3]}
+                        {decodeHtml(content.answers[3])}
                     </div>
                     </label>
 

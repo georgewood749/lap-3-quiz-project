@@ -20,21 +20,14 @@ export default function CreateGame() {
         questionType: ""
     });
 
-
-    const fetchQuestions = async (category, numQuestions, difficulty, type) => {
-        //* Key:
-        // Categories: id between 9-32
-        // numQuestions: number (up to 50)
-        // difficulty: easy/medium/hard
-        // type: multiple/boolean
-        try {
-            const { data } = await axios.get(`https://opentdb.com/api.php?amount=${numQuestions}&category=${category}&difficulty=${difficulty}&type=${type}`)
-            // return data
-            dispatch(store_qa(data));
-        } catch (err) {
-            // if (data.response_code === 1) { throw Error('Unable to retrieve enough questions!') }
-            throw new Error(err.message)
+    function genRanId(){
+        let result = "";
+        let characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        let charactersLength = 9;
+        for (let i = 0; i < charactersLength; i++) {
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
         }
+        return result;
     }
 
     const handleSubmit = (e) => {
@@ -46,7 +39,7 @@ export default function CreateGame() {
         // socket.emit('join-room', "2", roomInfo => {
         //     dispatch(store_room(roomInfo));
         // })
-        socket.emit('join-room', "tt", gameInfo.username)
+        socket.emit('join-room', genRanId(), gameInfo.username)
 
         socket.emit('set-game', gameInfo.category, gameInfo.numQuestions, gameInfo.difficulty, gameInfo.questionType, qa => {
             dispatch(store_user({ username: gameInfo.username, isHost: true }))

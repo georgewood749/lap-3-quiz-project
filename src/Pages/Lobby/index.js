@@ -20,8 +20,8 @@ export default function Lobby() {
         // socket.on('update-players', (roomID, roomSize, playersID) => {
         //     dispatch(store_room({roomID: roomID, roomSize: roomSize, playersID: playersID}))
         // })
-        socket.on('update-room', (room, playersName) => {
-            dispatch(update_room({roomID: room, players: playersName}))
+        socket.on('update-room', (room, playersID) => {
+            dispatch(update_room({roomID: room, players: playersID}))
         })
 
         socket.on('teleport-players', (qa) => {

@@ -1,6 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+
 
 export default function Results() {
+    const room = useSelector(state => state.socket.room);
+
+    const [ results, setResults ] = useState(<div className='leaderboardRow'></div>)
+
+    useEffect(() => {
+        setResults(room.players.map( p => (
+            <div className='leaderboardRow'>
+                <h2>{p.username}</h2>
+                <h2>{p.scores}</h2>
+            </div>
+        )).sort((a,b) => b.scores - a.scores))
+    },[room])
+
     return (
         <div>
             <h1>
@@ -9,7 +24,8 @@ export default function Results() {
             <div id='winner'>
                 Congratulations first!
             </div>
-            <div className='leaderboardRow'>
+            {results}
+            {/* <div className='leaderboardRow'>
                 <h2>first 🥇</h2>
                 <h2>1000</h2>
             </div>
@@ -24,7 +40,7 @@ export default function Results() {
             <div className='leaderboardRow'>
                 <h2>fourth</h2>
                 <h2>250</h2>
-            </div>
+            </div> */}
         </div>
     )
 }
