@@ -1,115 +1,56 @@
-import axios from 'axios';
-
-const fetchQuestions = async (category, numQuestions, difficulty, type) => {
-    // Key:
-        // Categories: id between 9-32
-        // numQuestions: number (up to 50)
-        // difficulty: easy/medium/hard
-        // type: multiple/boolean
-    try {
-        const { data } = await axios.get(`https://opentdb.com/api.php?amount=${numQuestions}&category=${category}&difficulty=${difficulty}&type=${type}`)
-        return data;
-    } catch (err) {
-        if (data.status === 404) { throw Error('Unable to retrieve questions!') }
-        throw new Error(err.message)
+const saveSocket = (socket) => {
+    return {
+        type: 'SAVE_SOCKET',
+        payload: socket
     }
 }
 
-// const categories = [
-//     {
-//     "id": 9,
-//     "name": "General Knowledge"
-//     },
-//     {
-//     "id": 10,
-//     "name": "Entertainment: Books"
-//     },
-//     {
-//     "id": 11,
-//     "name": "Entertainment: Film"
-//     },
-//     {
-//     "id": 12,
-//     "name": "Entertainment: Music"
-//     },
-//     {
-//     "id": 13,
-//     "name": "Entertainment: Musicals & Theatres"
-//     },
-//     {
-//     "id": 14,
-//     "name": "Entertainment: Television"
-//     },
-//     {
-//     "id": 15,
-//     "name": "Entertainment: Video Games"
-//     },
-//     {
-//     "id": 16,
-//     "name": "Entertainment: Board Games"
-//     },
-//     {
-//     "id": 17,
-//     "name": "Science & Nature"
-//     },
-//     {
-//     "id": 18,
-//     "name": "Science: Computers"
-//     },
-//     {
-//     "id": 19,
-//     "name": "Science: Mathematics"
-//     },
-//     {
-//     "id": 20,
-//     "name": "Mythology"
-//     },
-//     {
-//     "id": 21,
-//     "name": "Sports"
-//     },
-//     {
-//     "id": 22,
-//     "name": "Geography"
-//     },
-//     {
-//     "id": 23,
-//     "name": "History"
-//     },
-//     {
-//     "id": 24,
-//     "name": "Politics"
-//     },
-//     {
-//     "id": 25,
-//     "name": "Art"
-//     },
-//     {
-//     "id": 26,
-//     "name": "Celebrities"
-//     },
-//     {
-//     "id": 27,
-//     "name": "Animals"
-//     },
-//     {
-//     "id": 28,
-//     "name": "Vehicles"
-//     },
-//     {
-//     "id": 29,
-//     "name": "Entertainment: Comics"
-//     },
-//     {
-//     "id": 30,
-//     "name": "Science: Gadgets"
-//     },
-//     {
-//     "id": 31,
-//     "name": "Entertainment: Japanese Anime & Manga"
-//     },
-//     {
-//     "id": 32,
-//     "name": "Entertainment: Cartoon & Animations"
-//     }
-//     ]
+const updateState = (data) => {
+    return {
+        type: "UPDATE_STATE",
+        payload: data
+    }
+}
+
+const newUser = (user) => {
+    return {
+        type: 'NEW_USER',
+        payload: user
+    }
+}
+
+const saveUser = (user) => {
+    return {
+        type: 'SAVE_USER',
+        payload: user
+    }
+}
+
+const start = () => {
+    return {
+        type: 'START',
+    }
+}
+
+const finish = (user) => {
+    return {
+        type: "FINISH",
+        payload: user
+    }
+}
+
+const nextQuestion = () => {
+    return {
+        type: 'NEXT_QUESTION'
+    }
+}
+
+const addPoints = (player, points) => {
+    return {
+        type: 'ADD_POINTS',
+        "player": player,
+        "points": points
+    }
+}
+
+export { saveSocket, updateState, newUser, saveUser, start, finish, nextQuestion, addPoints };

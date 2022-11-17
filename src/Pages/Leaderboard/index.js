@@ -11,8 +11,6 @@ export default function Leaderboard() {
         try {
             const pointsData = await axios.get(fetchURL)
             setUsersData(pointsData.data.users)
-            // console.log("usersData: ", usersData)
-            // console.log("pointsData: ", pointsData.data)
         } catch (err) {
             console.error(err)
         }
@@ -20,14 +18,10 @@ export default function Leaderboard() {
 
     useEffect(() => {
         fetchPoints()
-        // console.log(usersData)
     }, [])
 
-    // fetchPoints()
 
-
-
-    const renderLeaderboard = usersData.map((pos, index) => {
+    const renderLeaderboard = usersData.slice(0, 8).map((pos, index) => {
         index ++
         switch (index) {
             case 1:
