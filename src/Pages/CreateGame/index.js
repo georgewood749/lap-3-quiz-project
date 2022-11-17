@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import { store_qa, store_room, add_player } from '../../actions/socket/socketSlice'
+import { store_user, store_qa } from '../../actions/socket/socketSlice'
 
 
 export default function CreateGame() {
@@ -10,7 +10,7 @@ export default function CreateGame() {
     const dispatch = useDispatch();
 
     const socket = useSelector(state => state.socket.socket)
-    const qa = useSelector(state => state.socket.qa);
+    
 
     const [gameInfo, setGameInfo] = useState({
         username: "",
@@ -36,7 +36,6 @@ export default function CreateGame() {
             throw new Error(err.message)
         }
     }
-        //! try fetchQA in socket.io-server and use cb to dispatch store_qa
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -44,8 +43,14 @@ export default function CreateGame() {
 
         //* Create a roomID and join
         // const roomID = Math.ceil(Math.random() * 100);
-        socket.emit('join-room', "2", roomInfo => {
-            dispatch(store_room(roomInfo));
+        // socket.emit('join-room', "2", roomInfo => {
+        //     dispatch(store_room(roomInfo));
+        // })
+        socket.emit('join-room', "tt", gameInfo.username)
+
+        socket.emit('set-game', gameInfo.category, gameInfo.numQuestions, gameInfo.difficulty, gameInfo.questionType, qa => {
+            dispatch(store_user({ username: gameInfo.username, isHost: true }))
+            dispatch(store_qa(qa))
         })
 
         setGameInfo([
@@ -57,6 +62,7 @@ export default function CreateGame() {
                 questionType: "",
             }
         ]);
+
         navigate('/lobby');
     };
 
@@ -67,6 +73,14 @@ export default function CreateGame() {
         <div className='main'>
             <h1>Create Game</h1>
             <form id='create' className='center' onSubmit={handleSubmit} role="form">
+
+            <input type="text" 
+                id='numQuestions' 
+                min={1} max={50} 
+                placeholder='Username' 
+                required 
+                value={gameInfo.username} 
+                onChange={(e) => setGameInfo({ ...gameInfo, username: e.target.value })}></input>
 
                 {/* <label htmlFor="difficulty">Difficulty: </label> */}
                 <select id="difficulty"

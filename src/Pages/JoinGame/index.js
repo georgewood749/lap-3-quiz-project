@@ -1,27 +1,25 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-import { store_room } from '../../actions/socket/socketSlice'
+import { useDispatch, useSelector } from 'react-redux';
+import { store_user } from '../../actions/socket/socketSlice';
+
 
 
 export default function JoinGame() {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [roomID, setRoomID] = useState('')
     const [username, setUsername] = useState('')
 
     //* Socket
     const socket = useSelector(state => state.socket.socket)
-    const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
 		e.preventDefault();
-
-        socket.emit('join-room', roomID, username, roomInfo => {
-            dispatch(store_room(roomInfo));
-        })
-
+        socket.emit('join-room', roomID, username)
+        dispatch(store_user({ username: username, isHost: false }))
 		navigate("/lobby");
 	};
 
@@ -40,7 +38,7 @@ export default function JoinGame() {
                     <label>Enter Username</label>
                 </div>
 
-                <input type='submit' value='Submit' disabled={!(roomID && username)}></input>
+                <input type='submit' value='Submit' disabled={!(roomID && username)} />
             </form>
 
         </div>
