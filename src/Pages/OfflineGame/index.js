@@ -109,9 +109,15 @@ export default function OfflineGame() {
     useEffect(() => {
         if (timer < 1) {
             if (questionNumber <= location.state.numQuestions) {
-                setQuestionNumber(prev => prev + 1)
-                questionDetails.shift()
-                setTimer(10);
+                if (playing === 1) {
+                    setPlaying(2)
+                    setTimer(10)
+                } else {
+                    questionDetails.shift()
+                    setTimer(10);
+                    setPlaying(1)
+                    setQuestionNumber(prev => prev + 1)
+                }
             } else {
                 setFinished(true);
                 navigate('/results', { state: { p1: player1Score, p2: player2Score } })

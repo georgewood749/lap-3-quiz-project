@@ -27,9 +27,9 @@ export default function CreateGame() {
 
     function Online() {
         if (gameInfo.difficulty && (gameInfo.numQuestions >= 5 && gameInfo.numQuestions <= 50) && gameInfo.category && username) {
-            return <input id='online'  type='submit' value='Online' onClick={handleSubmit}></input>
+            return <input id='online' type='submit' value='Online' onClick={handleSubmit}></input>
         } else {
-            return <input id='online'  type='submit' value='Online' disabled></input>
+            return <input id='online' type='submit' value='Online' disabled></input>
         };
     };
 
@@ -37,7 +37,7 @@ export default function CreateGame() {
         if (gameInfo.difficulty && (gameInfo.numQuestions >= 5 && gameInfo.numQuestions <= 50) && gameInfo.category) {
             return <input id='offline' type='submit' value='Offline' onClick={handleSubmitOffline}></input>
         } else {
-            return <input id='offline'  type='submit' value='Offline' disabled></input>
+            return <input id='offline' type='submit' value='Offline' disabled></input>
         };
     };
 
@@ -134,16 +134,16 @@ export default function CreateGame() {
                     <option value="medium">Medium</option>
                     <option value="hard">Hard</option>
                 </select>
-                <br/>
+                <br />
 
                 {/* <label htmlFor="numQuestions">Number of Questions: </label> */}
-                <input type="number" 
-                id='numQuestions'
-                min={5} max={50} 
-                placeholder='Number of Questions' 
-                required 
-                value={gameInfo.numQuestions} 
-                onChange={handleNumQuestionsChange}></input>
+                <input type="number"
+                    id='numQuestions'
+                    min={5} max={50}
+                    placeholder='Number of Questions'
+                    required
+                    value={gameInfo.numQuestions}
+                    onChange={handleNumQuestionsChange}></input>
                 <br />
 
                 {/* <label htmlFor="category">Category: </label> */}
@@ -184,15 +184,15 @@ export default function CreateGame() {
                 {/* <input id="username" placeholder='Enter username' />
                 <br /> */}
                 <div className="input_wrap" id='creator'>
-                    <input required type="text" value={username} onChange={ e => setUsername(e.target.value) } />
+                    <input required type="text" value={username} onChange={e => setUsername(e.target.value)} />
                     <label>Enter Username</label>
                 </div>
 
                 <Online />
-                
+
 
             </form>
         </>
-        
+
     )
 }
