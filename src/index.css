@@ -16,6 +16,12 @@ body {
   color: white;
 }
 
+#homeButton {
+	position: fixed;
+	top: 10px;
+	left: 10px;
+	width: 10%;
+}
 .main {
   position: fixed;
   top: 50%;

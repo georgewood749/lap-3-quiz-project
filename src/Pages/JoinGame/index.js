@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { useNavigate } from "react-router-dom";
+import { HomeButton } from '../../components';
 
 export default function JoinGame() {
 
@@ -23,6 +24,7 @@ export default function JoinGame() {
 
     return (
         <>
+            <HomeButton />
             <h1>Join Game</h1>
             <form id='join' className='center main' onSubmit={handleSubmit}>
                 <div className="input_wrap">

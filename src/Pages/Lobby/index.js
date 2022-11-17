@@ -1,5 +1,6 @@
 import React from 'react';
 import loading from "./loading.png";
+import { HomeButton } from '../../components';
 
 export default function Lobby() {
 
@@ -8,6 +9,7 @@ export default function Lobby() {
 
     return (
         <div>
+            <HomeButton />
             <h1>Lobby</h1>
             <div id='lobbyID'>Meeting ID: {currentMeeting}</div>
             <div id='lobby' className='center'>
