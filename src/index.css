@@ -95,7 +95,13 @@ input:focus + label, input:valid + label{
   padding: 0px 5px 0px 5px;
 }
 
-.input_wrap {
+#creator {
+  width: 100%; 
+  height:auto; 
+  position:relative;
+}
+
+.input_wrap:not(#creator) {
   width: 90%; 
   height:auto; 
   position:relative;

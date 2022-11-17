@@ -183,7 +183,7 @@ export default function CreateGame() {
 
                 {/* <input id="username" placeholder='Enter username' />
                 <br /> */}
-                <div className="input_wrap">
+                <div className="input_wrap" id='creator'>
                     <input required type="text" value={username} onChange={ e => setUsername(e.target.value) } />
                     <label>Enter Username</label>
                 </div>
