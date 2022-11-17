@@ -27,17 +27,17 @@ export default function CreateGame() {
 
     function Online() {
         if (gameInfo.difficulty && (gameInfo.numQuestions >= 5 && gameInfo.numQuestions <= 50) && gameInfo.category && username) {
-            return <input type='submit' value='Online' onClick={handleSubmit}></input>
+            return <input id='online'  type='submit' value='Online' onClick={handleSubmit}></input>
         } else {
-            return <input type='submit' value='Online' disabled></input>
+            return <input id='online'  type='submit' value='Online' disabled></input>
         };
     };
 
     function Offline() {
         if (gameInfo.difficulty && (gameInfo.numQuestions >= 5 && gameInfo.numQuestions <= 50) && gameInfo.category) {
-            return <input type='submit' value='Offline' onClick={handleSubmitOffline}></input>
+            return <input id='offline' type='submit' value='Offline' onClick={handleSubmitOffline}></input>
         } else {
-            return <input type='submit' value='Offline' disabled></input>
+            return <input id='offline'  type='submit' value='Offline' disabled></input>
         };
     };
 

@@ -87,70 +87,56 @@ describe("Create Game", () => {
     cy.get('h1').contains('Create Game');
   })
 
-  it('allows user to fill in the create game form and submit it', () => {
+  it('can create an offline game', () => {
     cy.get('#difficulty').select('easy');
     cy.get('#numQuestions').type('10');
     cy.get('#category').select('9');
-    cy.get('[type="submit"]').should('not.be.disabled').click();
-    cy.location('pathname').should('match', /\/game$/);
+    cy.get('#online').should('be.disabled');
+    cy.get('#offline').should('not.be.disabled').click();
+    cy.location('pathname').should('match', /\/offline$/);
   })
 
-  it('submit button is disabled for an empty form', () => {
-    cy.get('[type="submit"]').should('be.disabled');
-    cy.location('pathname').should('match', /\/create$/);
-  })
-
-  it('submit button is disabled for an incomplete form - difficulty not selected', () => {
+  it('cannot create an offline game without selecting difficulty', () => {
     cy.get('#numQuestions').type('10');
     cy.get('#category').select('9');
-    cy.get('[type="submit"]').should('be.disabled');
+    cy.get('#online').should('be.disabled');
+    cy.get('#offline').should('be.disabled');
     cy.location('pathname').should('match', /\/create$/);
   })
 
-  it('submit button is disabled for an incomplete form - number of questions not selected', () => {
+  it('cannot create an offline game without selecting number of questions', () => {
     cy.get('#difficulty').select('easy');
     cy.get('#category').select('9');
-    cy.get('[type="submit"]').should('be.disabled');
+    cy.get('#online').should('be.disabled');
+    cy.get('#offline').should('be.disabled');
     cy.location('pathname').should('match', /\/create$/);
   })
 
-  it('submit button is disabled for an incomplete form - category not selected', () => {
+  it('cannot create an offline game without selecting category', () => {
     cy.get('#difficulty').select('easy');
     cy.get('#numQuestions').type('10');
-    cy.get('[type="submit"]').should('be.disabled');
+    cy.get('#online').should('be.disabled');
+    cy.get('#offline').should('be.disabled');
     cy.location('pathname').should('match', /\/create$/);
   })
 
-  it('submit button should not be disabled when number of questions is equal to the minimum number allowed (i.e. 5)', () => {
+  it('can create an online game', () => {
     cy.get('#difficulty').select('easy');
-    cy.get('#numQuestions').type('5');
+    cy.get('#numQuestions').type('10');
     cy.get('#category').select('9');
-    cy.get('[type="submit"]').should('not.be.disabled').click();
-    cy.location('pathname').should('match', /\/game$/);
+    cy.get('#creator > input').type('creator');
+    cy.get('#offline').should('not.be.disabled');
+    cy.get('#online').should('not.be.disabled');
+    // cy.location('pathname').should('match', /\/lobby$/);
   })
 
-  it('submit button should not be disabled when number of questions is equal to the maximum number allowed (i.e. 5o)', () => {
+  it('cannot create an online game without a username', () => {
     cy.get('#difficulty').select('easy');
-    cy.get('#numQuestions').type('50');
+    cy.get('#numQuestions').type('10');
     cy.get('#category').select('9');
-    cy.get('[type="submit"]').should('not.be.disabled').click();
-    cy.location('pathname').should('match', /\/game$/);
-  })
-
-  it('submit button should be disabled when number of questions is under the minimum number allowed (i.e. less than 5)', () => {
-    cy.get('#difficulty').select('easy');
-    cy.get('#numQuestions').type('4');
-    cy.get('#category').select('9');
-    cy.get('[type="submit"]').should('be.disabled');
-    cy.location('pathname').should('match', /\/create$/);
-  })
-
-  it('submit button should be disabled when number of questions is over the maximum number allowed (i.e. more than 50)', () => {
-    cy.get('#difficulty').select('easy');
-    cy.get('#numQuestions').type('51');
-    cy.get('#category').select('9');
-    cy.get('[type="submit"]').should('be.disabled');
-    cy.location('pathname').should('match', /\/create$/);
+    cy.get('#offline').should('not.be.disabled');
+    cy.get('#online').should('be.disabled');
+    // cy.location('pathname').should('match', /\/lobby$/);
   })
 
 })
@@ -228,30 +214,6 @@ describe("Leaderboard", () => {
     cy.contains('🥇');
     cy.contains('🥈');
     cy.contains('🥉');
-  })
-
-})
-
-describe("Lobby", () => {
-  beforeEach(() => {
-    cy.viewport(1600, 900);
-    cy.visit('http://localhost:3000/lobby');
-  })
-
-  it("has the correct heading", () => {
-    cy.get('h1').contains('Lobby');
-  })
-
-})
-
-describe("Results", () => {
-  beforeEach(() => {
-    cy.viewport(1600, 900);
-    cy.visit('http://localhost:3000/results');
-  })
-
-  it("has the correct heading", () => {
-    cy.get('h1').contains('Podium');
   })
 
 })
