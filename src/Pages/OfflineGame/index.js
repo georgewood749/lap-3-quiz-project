@@ -20,7 +20,12 @@ export default function OfflineGame() {
     const [player1Score, setPlayer1Score] = useState(0)
     const [player2Score, setPlayer2Score] = useState(0)
 
-    const player = `Player ${playing} turn`
+    let player
+    if (questionNumber > location.state.numQuestions) {
+        player = 'Game over'
+    } else {
+        player = `Player ${playing} turn`
+    }
 
     const fetchQuestions = async (category, numQuestions, difficulty) => {
         try {
