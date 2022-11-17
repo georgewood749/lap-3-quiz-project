@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.png';
 import { HomeButton } from '../../components';
+import { BackButton } from '../../components';
 
 export default function Menu() {
     return (
         <>
             <HomeButton />
+            <BackButton />
             <h1>Welcome to AGTK Quiz</h1>
             <div className='main' id='menu'>
                 <div className='center'>
