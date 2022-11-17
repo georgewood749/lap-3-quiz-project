@@ -24,6 +24,26 @@ body {
   min-width: 40%;
 }
 
+#menu {
+  min-width: 70%;
+}
+
+button#create {
+  margin-top: 50px;
+}
+
+button#join {
+  margin-bottom: 50px;
+}
+
+button#leaderboard {
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%)
+}
+
 .center {
   border: solid 3px white;
   border-radius: 20px;
