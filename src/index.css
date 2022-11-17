@@ -233,7 +233,7 @@ form#create {
 
 #progress {
   background-color: rgb(255, 255, 255);
-  width: 10%; /* change */
+  width: 0%; /* change */
   border-radius: 10px;
   margin: 0;
   height: 15px;
