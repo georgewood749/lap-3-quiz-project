@@ -259,7 +259,8 @@ form#create {
 }
 
 #turn,
-#timer {
+#timer,
+#onlinePlayer {
   border: 1px solid white;
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.25);
@@ -272,6 +273,11 @@ form#create {
   margin: 20px 0;
   padding: 10px;
   font-size: 150%;
+  position: fixed;
+	top: 8px;
+	left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%)
 }
 
 #question {
@@ -425,4 +431,12 @@ select option {
   border: solid 2px white;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.25);
+}
+
+#startGame {
+  margin: auto;
+}
+
+#lobbyID {
+  text-align: center;
 }

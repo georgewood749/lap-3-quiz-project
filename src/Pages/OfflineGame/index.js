@@ -138,7 +138,8 @@ export default function OfflineGame() {
     if (questionNumber > location.state.numQuestions) {
         quizProgress = `${location.state.numQuestions}/${location.state.numQuestions}`
     } else {
-        quizProgress = `${questionNumber}/${location.state.numQuestions}`
+        // quizProgress = `${questionNumber}/${location.state.numQuestions}`
+        quizProgress = `${questionNumber}`
     }
 
     return (
@@ -147,13 +148,13 @@ export default function OfflineGame() {
                 <div id='turn'>
                     {`Question ${quizProgress}`}
                 </div>
-                <div id='player'>
-                    {player}
-                </div>
                 <div id='timer'>
                     {timer}
                 </div>
             </div>
+            <div id='player'>
+                    {player}
+                </div>
             <div id='question'>
                 {decodeHtml(question)}
             </div>

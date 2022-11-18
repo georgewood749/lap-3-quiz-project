@@ -75,18 +75,13 @@ export default function Game() {
         navigate('/results');
     }
 
-    const myTurn = true
-    const turn = myTurn ? 'Your turn' : 'Wait'
     const timer = '∞s'
 
     return (
         <div>
             <div id='gameHeader'>
-                <div id='player'>
+                <div id='onlinePlayer'>
                     {user.username}
-                </div>
-                <div id='turn'>
-                    {turn}
                 </div>
                 <div id='timer'>
                     {timer}
