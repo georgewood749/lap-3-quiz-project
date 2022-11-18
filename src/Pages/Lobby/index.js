@@ -40,11 +40,11 @@ export default function Lobby() {
             <BackButton />
             <h1>Lobby</h1>
             <div id='lobbyID'>Room ID: {roomInfo.roomID}</div>
-            <div className='main'>
-                <div id='lobby' className='center'>
-                    <img src={loading} alt="Loading" />
-                    <h2 id='playerCount'>{roomInfo.players.length} players in lobby...</h2>
-                </div>
+            <div id='lobby' className='center'>
+                <img src={loading} alt="Loading" />
+                <h2 id='playerCount'>{roomInfo.players.length} players in lobby...</h2>
+            </div>
+            <div id='centerStartGame'>
                 <button id='startGame' disabled={!isHost} onClick={startGame}>Let's GO!</button>
             </div>
         </div>
