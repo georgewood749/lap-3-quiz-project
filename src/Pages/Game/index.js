@@ -16,11 +16,11 @@ export default function Game() {
     const socket = useSelector(state => state.socket.socket);
     const submittedAns = useSelector(state => state.socket.submittedAns);
 
-    const [ content, setContent] = useState({ question: "Question", answers: [ "" ] })
-    const [ answer, setAnswer ] = useState("")
-    const [ nQsAnsed, setNQsAnsed] = useState(0)
+    const [content, setContent] = useState({ question: "Question", answers: [""] })
+    const [answer, setAnswer] = useState("")
+    const [nQsAnsed, setNQsAnsed] = useState(0)
 
-    function mixAns(incorrect_answers, correct_answer){
+    function mixAns(incorrect_answers, correct_answer) {
         let ranIdx = Math.floor(Math.random() * (incorrect_answers.length + 1))
         let mixed_answers = incorrect_answers.map(a => a);
         mixed_answers.splice(ranIdx, 0, correct_answer)
@@ -32,28 +32,28 @@ export default function Game() {
         txt.innerHTML = text;
         return txt.value;
     }
-    
-    useEffect(() => {
-        socket.on('sync-scores', ( id, username, scores )=>{
-            dispatch(sync_socres({ id: id, username: username, scores: scores }))
-        })
-    },[])
 
     useEffect(() => {
-        setContent({ 
-            question: qa.contents[nQsAnsed].question, 
+        socket.on('sync-scores', (id, username, scores) => {
+            dispatch(sync_socres({ id: id, username: username, scores: scores }))
+        })
+    }, [])
+
+    useEffect(() => {
+        setContent({
+            question: qa.contents[nQsAnsed].question,
             answers: mixAns(qa.contents[nQsAnsed].incorrect_answers, qa.contents[nQsAnsed].correct_answer)
         })
     }, [nQsAnsed])
 
     useEffect(() => {
-        if(submittedAns.length){
-            qa.settings.amount === (nQsAnsed + 1)?  submitAnswers() : updateScores()
+        if (submittedAns.length) {
+            qa.settings.amount === (nQsAnsed + 1) ? submitAnswers() : updateScores()
         }
     }, [submittedAns])
 
     const handleChange = (e) => {
-        if(e.target.checked) {
+        if (e.target.checked) {
             setAnswer(e.target.value)
         }
     }
@@ -61,15 +61,15 @@ export default function Game() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(`${nQsAnsed}/${qa.settings.amount} : ${answer}`);
-        dispatch(store_answers({questionNo: nQsAnsed, answer: answer}))
+        dispatch(store_answers({ questionNo: nQsAnsed, answer: answer }))
     }
 
-    function updateScores(){
+    function updateScores() {
         socket.emit('update-scores', room.roomID, socket.id, user.username, user.scores)
         setNQsAnsed(prev => prev + 1);
     }
 
-    function submitAnswers(){
+    function submitAnswers() {
         // setNQsAnsed(prev => prev = 0) // Loop back for Dev
         socket.emit('submit-results', user.username, user.scores)
         navigate('/results');
@@ -87,7 +87,7 @@ export default function Game() {
     customStyle.width = `${progress}%`
 
     let quizProgress
-    if (nQsAnsed > qa.settings.amount) {
+    if (nQsAnsed < qa.settings.amount) {
         quizProgress = `${qa.settings.amount}/${qa.settings.amount}`
     } else {
         // quizProgress = `${questionNumber}/${location.state.numQuestions}`
@@ -97,11 +97,11 @@ export default function Game() {
     return (
         <div>
             <div id='gameHeader'>
-            <div id='turn'>
-                    {`Question ${quizProgress}`}
-                </div>
                 <div id='onlinePlayer'>
                     {user.username}
+                </div>
+                <div id='turn'>
+                    {`Question ${quizProgress}`}
                 </div>
                 <div id='timer'>
                     {timer}
@@ -116,32 +116,32 @@ export default function Game() {
             <div id='answerBox'>
                 <form id='answerForm' onSubmit={handleSubmit}>
 
-                <input type='radio' name='answer' value={content.answers[0]} checked={answer === content.answers[0]} onChange={handleChange} id='a1'></input>
+                    <input type='radio' name='answer' value={content.answers[0]} checked={answer === content.answers[0]} onChange={handleChange} id='a1'></input>
                     <label htmlFor="a1">
-                    <div id="answer1">
-                        {decodeHtml(content.answers[0])}
-                    </div>
+                        <div id="answer1">
+                            {decodeHtml(content.answers[0])}
+                        </div>
                     </label>
 
                     <input type='radio' name='answer' value={content.answers[1]} checked={answer === content.answers[1]} onChange={handleChange} id='a2'></input>
                     <label htmlFor="a2">
-                    <div id="answer2">
-                        {decodeHtml(content.answers[1])}
-                    </div>
+                        <div id="answer2">
+                            {decodeHtml(content.answers[1])}
+                        </div>
                     </label>
 
                     <input type='radio' name='answer' value={content.answers[2]} checked={answer === content.answers[2]} onChange={handleChange} id='a3'></input>
                     <label htmlFor="a3">
-                    <div id="answer3">
-                        {decodeHtml(content.answers[2])}
-                    </div>
+                        <div id="answer3">
+                            {decodeHtml(content.answers[2])}
+                        </div>
                     </label>
 
                     <input type='radio' name='answer' value={content.answers[3]} checked={answer === content.answers[3]} onChange={handleChange} id='a4'></input>
                     <label htmlFor="a4">
-                    <div id="answer4">
-                        {decodeHtml(content.answers[3])}
-                    </div>
+                        <div id="answer4">
+                            {decodeHtml(content.answers[3])}
+                        </div>
                     </label>
 
                     <input type='submit' value='Submit' />
