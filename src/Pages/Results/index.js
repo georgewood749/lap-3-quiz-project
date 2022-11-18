@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { HomeButton } from '../../components';
 
 
 export default function Results() {
