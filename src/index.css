@@ -253,7 +253,7 @@ form#create {
 
 #gameHeader {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   width: 95%;
   margin: auto;
 }
