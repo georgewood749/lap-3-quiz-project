@@ -258,6 +258,13 @@ form#create {
   margin: auto;
 }
 
+#gameHeader2 {
+  display: flex;
+  justify-content: center;
+  width: 95%;
+  margin: auto;
+}
+
 #turn,
 #timer,
 #onlinePlayer {
@@ -433,8 +440,12 @@ select option {
   background-color: rgba(255, 255, 255, 0.25);
 }
 
-#startGame {
-  margin: auto;
+button#startGame {
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-53%)
 }
 
 #lobbyID {

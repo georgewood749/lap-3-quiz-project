@@ -79,7 +79,7 @@ export default function Game() {
 
     return (
         <div>
-            <div id='gameHeader'>
+            <div id='gameHeader2'>
                 <div id='onlinePlayer'>
                     {user.username}
                 </div>
