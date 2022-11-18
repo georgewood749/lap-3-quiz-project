@@ -1,8 +1,32 @@
-# Getting Started with Create React App
+# React Quiz - Lap 3 Project
+
+## Description
+
+This is the client-side code for a quiz app made with React.
+
+## Deployment
+
+- <a href="https://agtk-quiz.netlify.app/" target="_blank">Netlify</a>
+
+## Usage
+
+- This app has 2 modes: online and offline.
+- Offline mode allows 2 players to compete against each other on the same computer.
+- Online mode allows any number of players to compete against each other from different computers.
+- When creating an offline game, the user must pass in a difficulty, category, and number of questions (which must be between 5 and 50).
+- When creating an online game, the user must pass in a difficulty, category, number of questions (which must be between 5 and 50), and username.
+- Once an offline game has been created, the quiz will start immediately.
+- Once an online game has been created, the creator of the quiz will be redirected to the lobby with the room ID. Other players must then join the lobby by entering the room ID and their own username. The quiz will only begin when the creator clicks "Let's GO".
+
+## Technologies
+
+---
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
