@@ -88,7 +88,7 @@ export default function Game() {
 
     let quizProgress
     if (nQsAnsed < qa.settings.amount) {
-        quizProgress = `${nQsAnsed + 1}/${qa.settings.amount}`
+        quizProgress = `${nQsAnsed}/${qa.settings.amount}`
     } else {
         // quizProgress = `${questionNumber}/${location.state.numQuestions}`
         quizProgress = `${nQsAnsed}`
