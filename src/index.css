@@ -440,14 +440,6 @@ select option {
   background-color: rgba(255, 255, 255, 0.25);
 }
 
-button#startGame {
-  position: absolute;
-  left: 50%;
-  bottom: 50px;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-53%)
-}
-
 #lobbyID {
   text-align: center;
 }
