@@ -77,9 +77,29 @@ export default function Game() {
 
     const timer = '∞s'
 
+    let progress = (nQsAnsed / qa.settings.amount) * 100
+    const customStyle = {
+        width: '0%'
+    }
+    if (progress > 100) {
+        progress = 100
+    }
+    customStyle.width = `${progress}%`
+
+    let quizProgress
+    if (nQsAnsed > qa.settings.amount) {
+        quizProgress = `${qa.settings.amount}/${qa.settings.amount}`
+    } else {
+        // quizProgress = `${questionNumber}/${location.state.numQuestions}`
+        quizProgress = `${nQsAnsed}`
+    }
+
     return (
         <div>
             <div id='gameHeader'>
+            <div id='turn'>
+                    {`Question ${quizProgress}`}
+                </div>
                 <div id='onlinePlayer'>
                     {user.username}
                 </div>
@@ -91,7 +111,7 @@ export default function Game() {
                 {decodeHtml(content.question)}
             </div>
             <div id="progressBar">
-                <div id="progress"></div>
+                <div id="progress" style={customStyle}></div>
             </div>
             <div id='answerBox'>
                 <form id='answerForm' onSubmit={handleSubmit}>

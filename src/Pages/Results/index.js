@@ -1,45 +1,27 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { HomeButton } from '../../components'
+import React from 'react'
+import { useLocation } from 'react-router-dom'
 
 
 export default function Results() {
-    const room = useSelector(state => state.socket.room);
+    const location = useLocation()
+    const p1 = location.state.p1
+    const p2 = location.state.p2
 
-    const [ results, setResults ] = useState(<div className='leaderboardRow'></div>)
-
-    useEffect(() => {
-        setResults(room.players.map( p => (
-            <div className='leaderboardRow'>
-                <h2>{p.username}</h2>
-                <h2>{p.scores}</h2>
-            </div>
-        )).sort((a,b) => b.scores - a.scores))
-    },[room])
-
+    function calculateWinner(p1, p2) {
+        if (p1 > p2) {
+            return "Player 1 wins!"
+        } else if (p2 > p1) {
+            return "Player 2 wins!"
+        } else {
+            return "It was a draw!"
+        }
+    }
     return (
         <div>
-            <HomeButton />
-            <h1>
-                Podium
-            </h1>
-            {results}
-            {/* <div className='leaderboardRow'>
-                <h2>first 🥇</h2>
-                <h2>1000</h2>
-            </div>
-            <div className='leaderboardRow'>
-                <h2>second 🥈</h2>
-                <h2>750</h2>
-            </div>
-            <div className='leaderboardRow'>
-                <h2>third 🥉</h2>
-                <h2>500</h2>
-            </div>
-            <div className='leaderboardRow'>
-                <h2>fourth</h2>
-                <h2>250</h2>
-            </div> */}
+            <h1>Results</h1>
+            <h2>Player 1 scored {p1} points</h2>
+            <h2>Player 2 scored {p2} points</h2>
+            <h1>{calculateWinner(p1, p2)}</h1>
         </div>
     )
 }
