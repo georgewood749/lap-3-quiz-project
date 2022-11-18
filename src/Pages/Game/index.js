@@ -147,7 +147,7 @@ export default function Game() {
                     <input type='submit' value='Submit' />
 
                 </form>
-                <div id='otherPlayer'><div>{room.players.length} is playing...</div></div>
+                {/* <div id='otherPlayer'><div>{room.players.length} is playing...</div></div> */}
             </div>
         </div>
     )
