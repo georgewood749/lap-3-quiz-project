@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { HomeButton } from '../../components';
 import { BackButton } from '../../components';
 import logo from '../../images/logo.png'
 
 export default function Menu() {
     return (
         <>
+            <HomeButton />
             <BackButton />
             {/* <img src={logo} alt='logo' /> */}
             <h1>Welcome to AGTK Quiz</h1>
