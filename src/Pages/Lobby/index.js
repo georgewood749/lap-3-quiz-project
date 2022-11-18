@@ -44,7 +44,9 @@ export default function Lobby() {
                 <img src={loading} alt="Loading" />
                 <h2 id='playerCount'>{roomInfo.players.length} players in lobby...</h2>
             </div>
-            <button id='startGame' disabled={!isHost} onClick={startGame}>Let's GO!</button>
+            <div id='centerStartGame'>
+                <button id='startGame' disabled={!isHost} onClick={startGame}>Let's GO!</button>
+            </div>
         </div>
     )
 }

@@ -440,3 +440,10 @@ select option {
 #lobbyID {
   text-align: center;
 }
+
+#centerStartGame {
+  margin: auto;
+  width: 100%;
+  display: grid;
+  place-items:  center;
+}
