@@ -7,7 +7,7 @@ export default function Menu() {
     return (
         <>
             <BackButton />
-            <img src={logo} alt='logo' />
+            {/* <img src={logo} alt='logo' /> */}
             <h1>Welcome to AGTK Quiz</h1>
             <div className='main' id='menu'>
                 <div className='center'>
