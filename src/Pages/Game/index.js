@@ -83,9 +83,9 @@ export default function Game() {
                 <div id='onlinePlayer'>
                     {user.username}
                 </div>
-                <div id='timer'>
+                {/* <div id='timer'>
                     {timer}
-                </div>
+                </div>  */}
             </div>
             <div id='question'>
                 {decodeHtml(content.question)}
