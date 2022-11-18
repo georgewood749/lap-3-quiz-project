@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { BackButton } from '../../components';
-import logo from '../../images'
+import logo from '../../images/logo.png'
 
 export default function Menu() {
     return (
