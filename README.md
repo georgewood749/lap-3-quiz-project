@@ -20,6 +20,18 @@ This is the client-side code for a quiz app made with React.
 
 ## Technologies
 
+### React
+
+We used React to build the user interface of our application.
+
+### Redux
+
+Redux was used for state management.
+
+### Socket
+
+We used Socket to allow bidirectional and low-latency communication across our application.
+
 ---
 
 ## Getting Started with Create React App
