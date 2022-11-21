@@ -188,9 +188,9 @@ input[type='submit']:disabled {
 }
 
 input[type='submit'] {
-  border: solid 1px black;
-  background-color: white;
-  color: black;
+  border: solid 1px white;
+  color: white;
+  background-color: rgb(115, 185, 115);
   width: 100px;
   margin: 0;
   border-radius: 10px;
@@ -200,8 +200,8 @@ input[type='submit'] {
 
 input[type='submit']:hover:not(:disabled) {
   border: solid 1px white;
-  background-color: black;
   color: white;
+  background-color: rgb(70, 185, 70);
   width: 100px;
   margin: 0;
   border-radius: 10px;
@@ -256,6 +256,10 @@ form#create {
   justify-content: space-between;
   width: 95%;
   margin: auto;
+}
+
+input[type='submit']#online, input[type='submit']#offline  {
+  width: 180px;
 }
 
 #turn,

@@ -29,17 +29,17 @@ export default function CreateGame() {
 
     function Online() {
         if (gameInfo.difficulty && (gameInfo.numQuestions >= 5 && gameInfo.numQuestions <= 50) && gameInfo.category && gameInfo.username) {
-            return <input id='online' type='submit' value='Online' onClick={handleSubmit}></input>
+            return <input id='online' type='submit' value='Create Room' onClick={handleSubmit}></input>
         } else {
-            return <input id='online' type='submit' value='Online' disabled></input>
+            return <input id='online' type='submit' value='Create Room' disabled></input>
         };
     };
 
     function Offline() {
         if (gameInfo.difficulty && (gameInfo.numQuestions >= 5 && gameInfo.numQuestions <= 50) && gameInfo.category) {
-            return <input id='offline' type='submit' value='Offline' onClick={handleSubmitOffline}></input>
+            return <input id='offline' type='submit' value='Start Quiz' onClick={handleSubmitOffline}></input>
         } else {
-            return <input id='offline' type='submit' value='Offline' disabled></input>
+            return <input id='offline' type='submit' value='Start Quiz' disabled></input>
         };
     };
 
