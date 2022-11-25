@@ -10,7 +10,7 @@ export default function Menu() {
             <HomeButton />
             <BackButton />
             {/* <img src={logo} alt='logo' /> */}
-            <h1>Welcome to AGTK Quiz</h1>
+            <h1>Open Trivia Quiz</h1>
             <div className='main' id='menu'>
                 <div className='center'>
                     <Link to='/create'>
